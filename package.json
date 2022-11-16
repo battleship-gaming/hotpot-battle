@@ -1,0 +1,15 @@
+{
+  "name": "hotpot-battle",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/battleship-gaming/hotpot-battle.git",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
