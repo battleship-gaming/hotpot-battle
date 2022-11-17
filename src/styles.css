@@ -1,1 +1,26 @@
-/* CSS */
+* {
+    font-family: 'Noto Sans';
+}
+
+body {
+    background-color: #ffddc2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hotpot-grid {
+    margin: 5vmin;
+    display: grid;
+    background-color: #614833;
+    opacity: 0.15;
+    grid-template-rows: repeat(8, 5vmin);
+    grid-template-columns: repeat(8, 5vmin);
+}
+
+.player {
+    margin: 5vmin;
+}
