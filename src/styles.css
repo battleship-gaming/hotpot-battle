@@ -1,9 +1,9 @@
 * {
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans';    
 }
 
 body {
-    background-color: #ffddc2;
+    background-color: #FFCC9E;    
 }
 
 .container {
@@ -12,15 +12,50 @@ body {
     width: 100%;
 }
 
+.player {
+    font-size: 20px;
+    margin-left: 5vmin;
+    margin-right: 5vmin;
+}
+
 .hotpot-grid {
-    margin: 5vmin;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+    margin-left: 10vmin;
+    margin-right: 10vmin;
     display: grid;
     background-color: #614833;
     opacity: 0.15;
-    grid-template-rows: repeat(8, 5vmin);
-    grid-template-columns: repeat(8, 5vmin);
+    grid-template-rows: repeat(8, 8vmin);
+    grid-template-columns: repeat(8, 8vmin);
 }
 
-.player {
-    margin: 5vmin;
+.btn {
+    font-size: 20px;    
+    background-color: #FFB800;
+    border: none;
+    padding: 0.5em;
+    margin-left: 5vmin;
+    margin-right: 5vmin;
+    color: #FF0000;    
 }
+
+.grid-display {
+    display: flex;
+}
+
+.food {
+    position: relative;
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2vmin;
+    width: 5vmin;
+    height: 5vmin;
+    border-radius: 2vmin;
+}
+
+.ingr0, .ingr1, .ingr2, .ingr3 {
+    width: 20vmin;
+}
+
