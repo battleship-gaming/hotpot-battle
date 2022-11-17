@@ -3,7 +3,7 @@
 }
 
 body {
-    padding: 5vmin;
+    padding: 2vmin;
     background-color: #F0E3D4;       
 }
 
@@ -19,10 +19,6 @@ body {
     margin-right: 8vmin;    
 }
 
-.player-name {
-    
-}
-
 .hotpot-grid {
     margin-top: 2vmin;
     margin-bottom: 2vmin;
@@ -31,20 +27,25 @@ body {
     display: grid;
     background-color: #614833;
     opacity: 0.15;
-    grid-template-rows: repeat(8, 8vmin);
-    grid-template-columns: repeat(8, 8vmin);
+    grid-template-rows: repeat(8, 6.5vmin);
+    grid-template-columns: repeat(8, 6.5vmin);
+}
+
+.hotpot-grid > div {
+    border: 0.5px dashed black;
 }
 
 .btn {
-    font-size: 20px;    
+    font-size: 15px;    
     background-color: #FFB800;
     border: none;
     padding: 0.5em;
-    margin-left: 5vmin;
-    margin-right: 5vmin;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
     color: #FF0000;    
     border-radius: 2vmin;
-    border: 2px solid;   
+    border: 2px solid; 
+    cursor: pointer;  
 }
 
 .grid-display {
@@ -57,12 +58,16 @@ body {
     display: flex;
     flex-wrap: wrap;
     margin: 2vmin;
-    width: 5vmin;
-    height: 5vmin;
     border-radius: 2vmin;
 }
 
 .ingr0, .ingr1, .ingr2, .ingr3 {
-    width: 20vmin;
+    width: 23vmin;
+    height: 5.75vmin;
+}
+
+.ingr0-vert, .ingr1-vert, .ingr2-vert, .ingr3-vert {
+    width: 5.75vmin;
+    height: 23vmin;
 }
 
