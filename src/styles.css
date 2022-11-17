@@ -8,21 +8,21 @@ body {
 
 .container {
     display: flex;
-    justify-content: center;
+    justify-content: center;    
     width: 100%;
 }
 
-.player {
+.player-status {
     font-size: 20px;
-    margin-left: 5vmin;
-    margin-right: 5vmin;
+    margin-left: 8vmin;
+    margin-right: 8vmin;
 }
 
 .hotpot-grid {
     margin-top: 2vmin;
     margin-bottom: 2vmin;
-    margin-left: 10vmin;
-    margin-right: 10vmin;
+    margin-left: 8vmin;
+    margin-right: 8vmin;
     display: grid;
     background-color: #614833;
     opacity: 0.15;
