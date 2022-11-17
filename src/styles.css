@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #FFCC9E;    
+    padding: 5vmin;
+    background-color: #F0E3D4;       
 }
 
 .container {
@@ -12,10 +13,14 @@ body {
     width: 100%;
 }
 
-.player-status {
+.play-container {
     font-size: 20px;
     margin-left: 8vmin;
-    margin-right: 8vmin;
+    margin-right: 8vmin;    
+}
+
+.player-name {
+    
 }
 
 .hotpot-grid {
@@ -38,6 +43,8 @@ body {
     margin-left: 5vmin;
     margin-right: 5vmin;
     color: #FF0000;    
+    border-radius: 2vmin;
+    border: 2px solid;   
 }
 
 .grid-display {
