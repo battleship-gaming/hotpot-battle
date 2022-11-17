@@ -26,24 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };    
 
-function rotateFood() {
-    if (isHor) {
-        ingr0.classList.toggle('ingr0-vert')
-        ingr1.classList.toggle('ingr1-vert')
-        ingr2.classList.toggle('ingr2-vert')
-        ingr3.classList.toggle('ingr3-vert')
-        isHor = false
-        return
-    }
-    if (!isHor) {
-        ingr0.classList.toggle('ingr0-vert')
-        ingr1.classList.toggle('ingr1-vert')
-        ingr2.classList.toggle('ingr2-vert')
-        ingr3.classList.toggle('ingr3-vert')
-        isHor = true
-        return
-    }
-};
-rotateBtn.addEventListener('click', rotateFood)
+    function rotateFood() {
+        if (isHor) {
+            ingr0.classList.toggle('ingr0-vert')
+            ingr1.classList.toggle('ingr1-vert')
+            ingr2.classList.toggle('ingr2-vert')
+            ingr3.classList.toggle('ingr3-vert')
+            isHor = false
+            return
+        }
+        if (!isHor) {
+            ingr0.classList.toggle('ingr0-vert')
+            ingr1.classList.toggle('ingr1-vert')
+            ingr2.classList.toggle('ingr2-vert')
+            ingr3.classList.toggle('ingr3-vert')
+            isHor = true
+            return
+        }
+    };
+    rotateBtn.addEventListener('click', rotateFood)
 
 })
