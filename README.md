@@ -8,7 +8,10 @@ yarn install --frozen-lockfile
 ### To open the app:
 Open index.html with Live Server
 ## Git commands
-Create a new branch: git checkout -b branchName
-Pull latest code updates: git pull origin branchName 
-Push code updates : git push origin branchName
+Create a new branch :<br>
+&emsp;&emsp;git checkout -b your-branch-name<br><br>
+Pull latest code updates :<br>
+&emsp;&emsp;git pull origin your-branch-name<br><br>
+Push code updates :<br>
+&emsp;&emsp;git push origin your-branch-name
 
