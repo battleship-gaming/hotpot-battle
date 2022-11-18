@@ -1,1 +1,53 @@
-<!-- Multiplayer -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Hotpot Battle</title>
+        <script src="app.js" charset="utf-8"></script>
+        
+        <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+        <link rel="stylesheet" href="styles.css">
+        <!-- Press Start 2P Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- <a href="/src/index.html"><< Back</a>  -->
+
+        <div class="container">
+            <div class="play-container user">                
+                <div class="player-name">You</div> 
+                <div class="hotpot-grid grid-user"></div>
+            </div>
+            <div class="play-container opponent">
+                <div class="player-name">Your Hotpot Opponent</div>
+                <div class="hotpot-grid grid-opponent"></div>
+            </div>            
+        </div>
+
+        <div class="container">
+            <div>                
+                <button id="rotate-btn" class="btn">Rotate ingredients</button>
+                <button id="ready-btn" class="btn">Ready</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="grid-display">
+                <div class="food ingr0" draggable="true">
+                    <div id="ingr0-0"></div>
+                </div>
+                <div class="food ingr1" draggable="true">
+                    <div id="ingr1-0"></div>
+                </div>
+                <div class="food ingr2" draggable="true">
+                    <div id="ingr2-0"></div>
+                </div>
+                <div class="food ingr3" draggable="true">
+                    <div id="ingr3-0"></div>
+                </div>
+            </div>            
+        </div>    
+    </body>
+</html>

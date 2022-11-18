@@ -1,1 +1,73 @@
-/* CSS */
+* {
+    font-family: 'Noto Sans';    
+}
+
+body {
+    padding: 2vmin;
+    background-color: #F0E3D4;       
+}
+
+.container {
+    display: flex;
+    justify-content: center;    
+    width: 100%;
+}
+
+.play-container {
+    font-size: 20px;
+    margin-left: 8vmin;
+    margin-right: 8vmin;    
+}
+
+.hotpot-grid {
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+    margin-left: 8vmin;
+    margin-right: 8vmin;
+    display: grid;
+    background-color: #614833;
+    opacity: 0.15;
+    grid-template-rows: repeat(8, 6.5vmin);
+    grid-template-columns: repeat(8, 6.5vmin);
+}
+
+.hotpot-grid > div {
+    border: 0.5px dashed black;
+}
+
+.btn {
+    font-size: 15px;    
+    background-color: #FFB800;
+    border: none;
+    padding: 0.5em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    color: #FF0000;    
+    border-radius: 2vmin;
+    border: 2px solid; 
+    cursor: pointer;  
+}
+
+.grid-display {
+    display: flex;
+}
+
+.food {
+    position: relative;
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2vmin;
+    border-radius: 2vmin;
+}
+
+.ingr0, .ingr1, .ingr2, .ingr3 {
+    width: 23vmin;
+    height: 5.75vmin;
+}
+
+.ingr0-vert, .ingr1-vert, .ingr2-vert, .ingr3-vert {
+    width: 5.75vmin;
+    height: 23vmin;
+}
+
