@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const userName = document.getElementById('user-name').value
+  const saveNameBtn = document.querySelector('#save-name-btn')
+  const greeting = document.querySelector('#greeting')
+  saveNameBtn.onclick = () => {
+    // greeting.textContent = `Welcome, ${userName}!`;
+    console.log('username:')
+  }
+
   const userGrid = document.querySelector('.grid-user')
   const computerGrid = document.querySelector('.grid-opponent')
   const displayGrid = document.querySelector('.grid-display')
