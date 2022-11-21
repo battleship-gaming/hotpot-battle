@@ -45,8 +45,8 @@ body {
       border: 0.5px dashed black;
   }
   
-  .grid-opponent > .taken,
-  .grid-opponent > .boom {
+  .grid-enemy > .taken,
+  .grid-enemy > .boom {
     background-color: hsl(200, 100%, 50%) !important;
     border-radius: 0 !important;
   }

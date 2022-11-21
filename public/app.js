@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const userGrid = document.querySelector('.grid-user')
-  const computerGrid = document.querySelector('.grid-opponent')
+  const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
   const food = document.querySelectorAll('.food')
   const ingr0 = document.querySelector('.ingr0-container')
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoDisplay = document.querySelector('#info')
   const setupButtons = document.getElementById('setup-buttons')
   const userSquares = []
-  const computerSquares = []
+  const enemySquares = []
   let isHorizontal = true
   let isGameOver = false
   let currentPlayer = 'user'
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   createBoard(userGrid, userSquares)
-  createBoard(computerGrid, computerSquares)
+  createBoard(enemyGrid, enemySquares)
 
   startMultiPlayer()
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       else infoDisplay.innerHTML = "Please place all ships"
     })
 
-    computerSquares.forEach(square => {
+    enemySquares.forEach(square => {
       square.addEventListener('click', () => {
         if(currentPlayer === 'user' && ready && enemyReady) {
           shotFired = square.dataset.id
@@ -131,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function playerConnectedOrDisconnected(num) {
       let player = `.p${parseInt(num) + 1}`
       document.querySelector(`${player} .connected`).classList.toggle('active')
-      if(parseInt(num) === playerNum) document.querySelector(player).style.fontWeight = 'bold'
     }
   }
 
@@ -258,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let ingr3Count = 0
 
   function revealSquare(classList) {
-    const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
+    const enemySquare = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
     const obj = Object.values(classList)
     if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
       if (obj.includes('ingr0')) ingr0Count++
