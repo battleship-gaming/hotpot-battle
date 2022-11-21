@@ -3,6 +3,10 @@ body {
     background-color: #F3F3F3;
     overflow-x: hidden;
   }
+
+  .index{background-image:url('firstpagebg.png');}
+  .multiplayer{background-image:url('hotpotbg.png');}
+
   
   *, *::before, *::after {
       font-family: 'Press Start 2P', cursive;
