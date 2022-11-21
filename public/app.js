@@ -1,13 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const submitName = document.querySelector('#submit-name')  
-  let player1Name = 'Player1';
-  function greetPlayer() {        
-    player1Name = document.querySelector('#player1-name')
-    let greeting = document.querySelector('#greeting')
-    greeting.innerHTML = "Welcome, " + player1Name.value + "!"     
-  }
-  submitName.addEventListener('click', greetPlayer)
+document.addEventListener('DOMContentLoaded', () => {  
+  // const submitName = document.querySelector('#submit-name')    
+  // let player1Name = 'Player 1'
+  // function greetPlayer() {        
+  //   let p1NameInput = document.querySelector('#p1-name-input')
+  //   let greeting = document.querySelector('#greeting')
+  //   greeting.innerHTML = "Welcome, " + p1NameInput.value + "!"     
+  //   console.log('Player1:', p1NameInput.value)
 
+  //   player1Name = document.querySelector('player1-name')
+  //   player1Name.innerHTML = p1NameInput.value
+  // }
+  // submitName.addEventListener('click', greetPlayer)
+  
   const userGrid = document.querySelector('.grid-user')
   const computerGrid = document.querySelector('.grid-opponent')
   const displayGrid = document.querySelector('.grid-display')
@@ -65,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   createBoard(userGrid, userSquares)
   createBoard(computerGrid, computerSquares)
+  console.log('Player1Name:', player1Name)
 
   startMultiPlayer()
 
