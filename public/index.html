@@ -12,6 +12,19 @@
   </head>
   <body>
     <h1>Hotpot Battle</h1>
-    <a href="/Multiplayer.html" class="btn">Multiplayer</a>
+    <input id="p1-name-input">
+    <button id="save-name" class="btn">OK</button>
+    <h2 id="greeting"></h2>
+    <script>
+      const saveName = document.querySelector('#save-name')      
+      function greetPlayer() {
+        // console.log('greet')
+        let p1NameInput = document.querySelector('#p1-name-input')
+        let greeting = document.querySelector('#greeting')
+        greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
+      }
+      saveName.addEventListener('click', greetPlayer)
+    </script>
+    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn">Multiplayer</a>    
   </body>
 </html>
