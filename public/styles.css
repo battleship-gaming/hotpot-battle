@@ -52,7 +52,7 @@ body {
   }
   
   .taken,
-  .ship {
+  .food {
     position: relative;
     background-color: hsl(0, 0%, 80%);
   }
@@ -106,12 +106,12 @@ body {
     display: flex;
   }
   
-  .ship > div {
+  .food > div {
     width: 4.6vmin;
     height: 4.6vmin;
   }
   
-  .ship {
+  .food {
     width: calc(4.6vmin * var(--width, 1));
     height: calc(4.6vmin * var(--height, 1));
     background-color: green;
