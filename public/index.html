@@ -5,6 +5,7 @@
     <title>Hotpot Battle</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" charset="utf-8"></script>
     <!-- Press Start 2P Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +15,14 @@
     <h1>Hotpot Battle</h1>
     <input id="p1-name-input">
     <button id="save-name" class="btn">OK</button>
-    <h2 id="greeting"></h2>
+    <h2 id="greeting"></h2>    
     <script>
-      const saveName = document.querySelector('#save-name')      
+      const saveName = document.querySelector('#save-name')  
+      const p1NameInput = document.querySelector('#p1-name-input')    
       function greetPlayer() {
-        // console.log('greet')
-        let p1NameInput = document.querySelector('#p1-name-input')
         let greeting = document.querySelector('#greeting')
         greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
+        localStorage["player1"] = p1NameInput.value;
       }
       saveName.addEventListener('click', greetPlayer)
     </script>
