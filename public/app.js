@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const submitName = document.querySelector('#submit-name')  
+  let player1Name = 'Player1';
+  function greetPlayer() {        
+    player1Name = document.querySelector('#player1-name')
+    let greeting = document.querySelector('#greeting')
+    greeting.innerHTML = "Welcome, " + player1Name.value + "!"     
+  }
+  submitName.addEventListener('click', greetPlayer)
+
   const userGrid = document.querySelector('.grid-user')
   const computerGrid = document.querySelector('.grid-opponent')
   const displayGrid = document.querySelector('.grid-display')
