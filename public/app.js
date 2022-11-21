@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {  
   const userGrid = document.querySelector('.grid-user')
   const computerGrid = document.querySelector('.grid-opponent')
   const displayGrid = document.querySelector('.grid-display')
@@ -22,6 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let enemyReady = false
   let allShipsPlaced = false
   let shotFired = -1
+
+  let player1Name = document.querySelector('#player1-name')
+  player1Name.innerHTML = "Player1"
+  // const multiplayerBtn = document.querySelector('#multiplayer-btn')
+  // function setPlayer1Name() {
+  //   console.log(player1Name.value)
+  // }
+  // multiplayerBtn.addEventListener('click', setPlayerName)
+
   //Ships
   const food = [
     {
