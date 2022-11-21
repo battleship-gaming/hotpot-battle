@@ -23,7 +23,8 @@ body {
     color: #FF0000;
     border-radius: 2vmin;
     border: 2px solid; 
-    cursor: pointer;  
+    cursor: pointer;
+    position: absolute; left:1150px; top:860px;
   }
   
   .btn:hover, .btn:focus {
