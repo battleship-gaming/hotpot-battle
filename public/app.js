@@ -66,10 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         infoDisplay.innerHTML = "Sorry, the server is full"
       } else {
         playerNum = parseInt(num)
-        if(playerNum === 1) currentPlayer = "enemy"
-
-        console.log(playerNum)
-
+        let randomStarter = (Math.random()>=0.5)? 1 : 0
+        if(randomStarter === 1 && playerNum === 0) { // For the first player, it is not guaranteed that they start first
+          currentPlayer = "enemy"
+        } else {
+          currentPlayer = "user"
+        }
+        console.log(currentPlayer)
         socket.emit('check-players')
       }
     })
