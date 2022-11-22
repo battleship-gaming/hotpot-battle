@@ -4,8 +4,14 @@ body {
     overflow-x: hidden;
   }
 
-  .index{background-image:url('firstpagebg.png');}
-  .multiplayer{background-image:url('hotpotbg.png');}
+  .index{
+    background-image:url('firstpagebg.jpg');
+    z-index:1;
+  }
+  .multiplayer{
+    background-image:url('hotpotbg.png');
+    z-index:1;
+  }
 
   
   *, *::before, *::after {
@@ -13,7 +19,24 @@ body {
       box-sizing: border-box;
   }
   
-  .btn {
+  .btn1 {
+    font-size: 26px;
+    background-color: #409A53;
+    cursor: pointer;
+    padding: 0.5em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    color: #FFFFFF;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    position: relative; left:1150px; top:840px;
+    width: 200px;
+    height: 100px;
+    z-index:2;
+  }
+
+  .btn2 {
     font-size: inherit;
     background-color: #FFB800;
     cursor: pointer;
@@ -24,10 +47,14 @@ body {
     border-radius: 2vmin;
     border: 2px solid; 
     cursor: pointer;
-    position: absolute; left:1150px; top:860px;
+    z-index:2;
   }
   
   .btn:hover, .btn:focus {
+    background-color: #b98603;
+  }
+
+  .btn2:hover, .btn2:focus {
     background-color: #b98603;
   }
   
@@ -35,6 +62,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+    z-index:2;
   }
   
   .hotpot-grid {
@@ -44,10 +72,12 @@ body {
     opacity: 0.15;
     grid-template-rows: repeat(8, 6.5vmin);
     grid-template-columns: repeat(8, 6.5vmin);
+    z-index:2;
   }
   
   .hotpot-grid div {
       border: 0.5px dashed black;
+      z-index:2;
   }
   
   .grid-enemy > .taken,
@@ -109,6 +139,7 @@ body {
   
   .grid-display {
     display: flex;
+    z-index:2;
   }
   
   .food > div {
@@ -131,6 +162,7 @@ body {
   .ingr2-container,
   .ingr3-container {
     --width: 4;
+    z-index:3;
   }
   
   .ingr0-container-vertical,
@@ -139,6 +171,7 @@ body {
   .ingr3-container-vertical {
     --height: 4;
     --width: 1;
+    z-index:3;
   }
   
   .options {
