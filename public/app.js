@@ -230,6 +230,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!displayGrid.querySelector('.food')) allFoodPlaced = true
   }
 
+  function turnColor() {
+    if(currentPlayer === 'user') {
+      document.querySelector(".p1").style.color = "green";
+      document.querySelector(".p2").style.color = "black";
+    }
+    if(currentPlayer === 'enemy') {
+      document.querySelector(".p1").style.color = "black";
+      document.querySelector(".p2").style.color = "green";
+    }
+  }
+
   function playGameMulti(socket) {
     setupButtons.style.display = 'none'
     if(isGameOver) return
@@ -240,27 +251,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(enemyReady) {
-      if(currentPlayer === 'user') {
-        document.querySelector(".p1").style.color = "green";
-        document.querySelector(".p2").style.color = "black";
-      }
-      if(currentPlayer === 'enemy') {
-        document.querySelector(".p1").style.color = "black";
-        document.querySelector(".p2").style.color = "green";
-      }
+      turnColor()
+      startTimer()
     }
   }
 
+  var downloadTimer;
+  var timeleft;
+
   function startTimer() {
-    var timeleft = 10;
-    var downloadTimer = setInterval(function(){
+    timeleft = 10;
+    clearInterval(downloadTimer);
+    downloadTimer = setInterval(function(){
       if(timeleft <= 0){
-        clearInterval(downloadTimer);
         if(currentPlayer === 'user') {
-          revealSquare()
-        }
-        if(currentPlayer === 'enemy') {
-          enemyGo()
+          currentPlayer = 'enemy'
+          turnColor()
+          timeleft = 10
+        } else {
+          if(currentPlayer === 'enemy') {
+            currentPlayer = 'user'
+            turnColor()
+            timeleft = 10
+          }
         }
       }
       document.getElementById("progressBar").value = timeleft;
@@ -279,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let ingr3Count = 0
 
   function revealSquare(classList) {
+    console.log(classList)
     const enemySquare = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
     const obj = Object.values(classList)
     if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
@@ -294,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkForWins()
     currentPlayer = 'enemy'
+    turnColor()
     startTimer()
   }
 
