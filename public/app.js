@@ -63,14 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('player-number', num => {
       if (num === -1) {
-        infoDisplay.innerHTML = "Sorry, the server is full"
+        infoDisplay.innerHTML = "The restaurant is full."
       } else {
         playerNum = parseInt(num)
         let randomStarter = (Math.random()>=0.5)? 1 : 0
-        if(randomStarter === 1 && playerNum === 0) { // For the first player, it is not guaranteed that they start first
-          currentPlayer = "enemy"
+        if(randomStarter === 1) {
+          if(playerNum === 0) currentPlayer = "enemy"
+          if(playerNum === 1) currentPlayer = "user"
         } else {
-          currentPlayer = "user"
+          if(playerNum === 0) currentPlayer = "user"
+          if(playerNum === 1) currentPlayer = "enemy"
         }
         console.log(currentPlayer)
         socket.emit('check-players')
@@ -99,10 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if(i !== playerReady) enemyReady = true
         }
       })
-    })
-
-    socket.on('timeout', () => {
-      infoDisplay.innerHTML = 'You have reached the 10 minute limit'
     })
 
     startButton.addEventListener('click', () => {
