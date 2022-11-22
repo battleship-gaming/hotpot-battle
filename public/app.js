@@ -24,10 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let shotFired = -1
 
   let player1Name = document.querySelector('#player1-name')  
-  player1Name.innerHTML = localStorage["player1"]
-  // localStorage.clear()
-  let player2Name = document.querySelector('#player2-name')  
-  player2Name.innerHTML = 'enemy'
+  player1Name.innerHTML = sessionStorage.getItem('player1')  
 
   const foodArray = [
     {
@@ -82,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(currentPlayer)
         socket.emit('check-players')
       }
-    })
-
+    })    
+    
     socket.on('player-connection', num => {
       console.log(`Player number ${num} has connected or disconnected`)
       playerConnectedOrDisconnected(num)
@@ -137,6 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
       revealSquare(classList)
       playGameMulti(socket)
     })
+
+    socket.emit('player-name', sessionStorage.getItem('player1'))
+    socket.on('enemyName', enemyName => {
+      let player2Name = document.querySelector('#player2-name')  
+      player2Name.innerHTML = enemyName              
+      socket.emit('player-name', sessionStorage.getItem('player1'))   
+    })
+    
 
     function playerConnectedOrDisconnected(num) {
       let player = `.p${parseInt(num) + 1}`

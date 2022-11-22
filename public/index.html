@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <title>Hotpot Battle</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css">    
     <!-- Press Start 2P Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <script src="server.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <h1>Hotpot Battle</h1>
@@ -18,13 +21,19 @@
     <h2 id="greeting"></h2>    
     <script>
       const saveName = document.querySelector('#save-name')  
-      const p1NameInput = document.querySelector('#p1-name-input')    
+      const p1NameInput = document.querySelector('#p1-name-input')  
+      const multiplayerBtn = document.querySelector('#multiplayer-btn')  
       function greetPlayer() {
         let greeting = document.querySelector('#greeting')
         greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
-        localStorage["player1"] = p1NameInput.value;
+        sessionStorage.setItem('player1', p1NameInput.value)
+        console.log('playerIndex:', sessionStorage["playerIndex"])
       }
       saveName.addEventListener('click', greetPlayer)
+      function submitName() {
+        console.log('playerIndex:', playerIndex)
+      }
+      multiplayerBtn.addEventListener('click', submitName)
     </script>
     <a href="/Multiplayer.html" id="multiplayer-btn" class="btn">Multiplayer</a>    
   </body>

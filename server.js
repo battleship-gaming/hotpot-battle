@@ -30,7 +30,7 @@ io.on('connection', socket => {
 
   // Tell the connecting client what player number they are
   socket.emit('player-number', playerIndex)
-
+  
   console.log(`Player ${playerIndex} has connected`)
 
   // Ignore player 3
@@ -78,6 +78,10 @@ io.on('connection', socket => {
 
     // Forward the reply to the other player
     socket.broadcast.emit('fire-reply', square)
+  })
+
+  socket.on('player-name', playerName => {
+    socket.broadcast.emit('enemyName', playerName)
   })
 
   // Timeout connection
