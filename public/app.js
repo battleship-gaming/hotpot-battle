@@ -241,12 +241,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(enemyReady) {
       if(currentPlayer === 'user') {
-        infoDisplay.innerHTML = 'Your Go'
+        document.querySelector(".p1").style.color = "green";
+        document.querySelector(".p2").style.color = "black";
       }
       if(currentPlayer === 'enemy') {
-        infoDisplay.innerHTML = "Enemy's Go"
+        document.querySelector(".p1").style.color = "black";
+        document.querySelector(".p2").style.color = "green";
       }
     }
+  }
+
+  function startTimer() {
+    var timeleft = 10;
+    var downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        if(currentPlayer === 'user') {
+          revealSquare()
+        }
+        if(currentPlayer === 'enemy') {
+          enemyGo()
+        }
+      }
+      document.getElementById("progressBar").value = timeleft;
+      timeleft -= 1;
+    }, 1000);
   }
 
   function playerReady(num) {
@@ -275,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkForWins()
     currentPlayer = 'enemy'
+    startTimer()
   }
 
   let oppIngr0Count = 0
@@ -293,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (userSquares[square].classList.contains('ingr3')) oppIngr3Count++
       checkForWins()
     currentPlayer = 'user'
-    infoDisplay.innerHTML = 'Your Go'
+    startTimer()
     }
   }
 
