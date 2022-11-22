@@ -5,8 +5,8 @@ body {
   }
   
   *, *::before, *::after {
-      font-family: 'Press Start 2P', cursive;
-      box-sizing: border-box;
+    font-family: 'Fredoka One', cursive;
+    box-sizing: border-box;
   }
   
   .btn {
@@ -19,7 +19,9 @@ body {
     color: #FF0000;
     border-radius: 2vmin;
     border: 2px solid; 
-    cursor: pointer;  
+    cursor: pointer;
+    text-decoration: none;
+
   }
   
   .btn:hover, .btn:focus {
