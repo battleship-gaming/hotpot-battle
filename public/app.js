@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const userGrid = document.querySelector('.grid-user')
-  const computerGrid = document.querySelector('.grid-opponent')
+  const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
-  const ships = document.querySelectorAll('.ship')
+  const food = document.querySelectorAll('.food')
   const ingr0 = document.querySelector('.ingr0-container')
   const ingr1 = document.querySelector('.ingr1-container')
   const ingr2 = document.querySelector('.ingr2-container')
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoDisplay = document.querySelector('#info')
   const setupButtons = document.getElementById('setup-buttons')
   const userSquares = []
-  const computerSquares = []
+  const enemySquares = []
   let isHorizontal = true
   let isGameOver = false
   let currentPlayer = 'user'
@@ -20,10 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let playerNum = 0
   let ready = false
   let enemyReady = false
-  let allShipsPlaced = false
+  let allFoodPlaced = false
   let shotFired = -1
-  //Ships
-  const food = [
+  const foodArray = [
     {
       name: 'ingr0',
       directions: [
@@ -55,36 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   createBoard(userGrid, userSquares)
-  createBoard(computerGrid, computerSquares)
+  createBoard(enemyGrid, enemySquares)
 
   startMultiPlayer()
 
-  // Multiplayer
   function startMultiPlayer() {
     const socket = io();
 
-    // Get your player number
     socket.on('player-number', num => {
       if (num === -1) {
         infoDisplay.innerHTML = "Sorry, the server is full"
       } else {
         playerNum = parseInt(num)
-        if(playerNum === 1) currentPlayer = "enemy"
-
-        console.log(playerNum)
-
-        // Get other player status
+        let randomStarter = (Math.random()>=0.5)? 1 : 0
+        if(randomStarter === 1 && playerNum === 0) { // For the first player, it is not guaranteed that they start first
+          currentPlayer = "enemy"
+        } else {
+          currentPlayer = "user"
+        }
+        console.log(currentPlayer)
         socket.emit('check-players')
       }
     })
 
-    // Another player has connected or disconnected
     socket.on('player-connection', num => {
       console.log(`Player number ${num} has connected or disconnected`)
       playerConnectedOrDisconnected(num)
     })
 
-    // On enemy ready
     socket.on('enemy-ready', num => {
       enemyReady = true
       playerReady(num)
@@ -94,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
 
-    // Check player status
     socket.on('check-players', players => {
       players.forEach((p, i) => {
         if(p.connected) playerConnectedOrDisconnected(i)
@@ -105,19 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })
 
-    // On Timeout
     socket.on('timeout', () => {
       infoDisplay.innerHTML = 'You have reached the 10 minute limit'
     })
 
-    // Ready button click
     startButton.addEventListener('click', () => {
-      if(allShipsPlaced) playGameMulti(socket)
+      if(allFoodPlaced) playGameMulti(socket)
       else infoDisplay.innerHTML = "Please place all ships"
     })
 
-    // Setup event listeners for firing
-    computerSquares.forEach(square => {
+    enemySquares.forEach(square => {
       square.addEventListener('click', () => {
         if(currentPlayer === 'user' && ready && enemyReady) {
           shotFired = square.dataset.id
@@ -126,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     })
 
-    // On Fire Received
     socket.on('fire', id => {
       enemyGo(id)
       const square = userSquares[id]
@@ -134,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
       playGameMulti(socket)
     })
 
-    // On Fire Reply Received
     socket.on('fire-reply', classList => {
       revealSquare(classList)
       playGameMulti(socket)
@@ -143,11 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function playerConnectedOrDisconnected(num) {
       let player = `.p${parseInt(num) + 1}`
       document.querySelector(`${player} .connected`).classList.toggle('active')
-      if(parseInt(num) === playerNum) document.querySelector(player).style.fontWeight = 'bold'
     }
   }
 
-  //Create Board
   function createBoard(grid, squares) {
     for (let i = 0; i < width*width; i++) {
       const square = document.createElement('div')
@@ -157,8 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-
-  //Rotate the ships
   function rotate() {
     if (isHorizontal) {
       ingr0.classList.toggle('ingr0-container-vertical')
@@ -166,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ingr2.classList.toggle('ingr2-container-vertical')
       ingr3.classList.toggle('ingr3-container-vertical')
       isHorizontal = false
-      // console.log(isHorizontal)
       return
     }
     if (!isHorizontal) {
@@ -175,34 +161,28 @@ document.addEventListener('DOMContentLoaded', () => {
       ingr2.classList.toggle('ingr2-container-vertical')
       ingr3.classList.toggle('ingr3-container-vertical')
       isHorizontal = true
-      // console.log(isHorizontal)
       return
     }
   }
   rotateButton.addEventListener('click', rotate)
 
-  //move around user ship
-  ships.forEach(ship => ship.addEventListener('dragstart', dragStart))
+  food.forEach(ship => ship.addEventListener('dragstart', dragStart))
   userSquares.forEach(square => square.addEventListener('dragstart', dragStart))
   userSquares.forEach(square => square.addEventListener('dragover', dragOver))
   userSquares.forEach(square => square.addEventListener('dragenter', dragEnter))
-  userSquares.forEach(square => square.addEventListener('dragleave', dragLeave))
   userSquares.forEach(square => square.addEventListener('drop', dragDrop))
-  userSquares.forEach(square => square.addEventListener('dragend', dragEnd))
 
   let selectedShipNameWithIndex
   let draggedShip
   let draggedShipLength
 
-  ships.forEach(ship => ship.addEventListener('mousedown', (e) => {
+  food.forEach(ship => ship.addEventListener('mousedown', (e) => {
     selectedShipNameWithIndex = e.target.id
-    // console.log(selectedShipNameWithIndex)
   }))
 
   function dragStart() {
     draggedShip = this
     draggedShipLength = this.childNodes.length
-    // console.log(draggedShip)
   }
 
   function dragOver(e) {
@@ -213,17 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
   }
 
-  function dragLeave() {
-    // console.log('drag leave')
-  }
-
   function dragDrop() {
     let shipNameWithLastId = draggedShip.lastChild.id
     let shipClass = shipNameWithLastId.slice(0, -2)
-    // console.log(shipClass)
     let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
     let shipLastId = lastShipIndex + parseInt(this.dataset.id)
-    // console.log(shipLastId)
     const notAllowedHorizontal = [0,8,16,24,32,40,48,56,1,9,17,25,33,41,49,57,2,10,18,26,34,42,80]
     const notAllowedVertical = [63,62,61,60,59,58,57,56,55,54,53,52,51,50]
     
@@ -234,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1))
 
     shipLastId = shipLastId - selectedShipIndex
-    // console.log(shipLastId)
 
     if (isHorizontal && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i=0; i < draggedShipLength; i++) {
@@ -243,8 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (i === draggedShipLength - 1) directionClass = 'end'
         userSquares[parseInt(this.dataset.id) - selectedShipIndex + i].classList.add('taken', 'horizontal', directionClass, shipClass)
       }
-    //As long as the index of the ship you are dragging is not in the newNotAllowedVertical array! This means that sometimes if you drag the ship by its
-    //index-1 , index-2 and so on, the ship will rebound back to the displayGrid.
+
     } else if (!isHorizontal && !newNotAllowedVertical.includes(shipLastId)) {
       for (let i=0; i < draggedShipLength; i++) {
         let directionClass
@@ -255,14 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else return
 
     displayGrid.removeChild(draggedShip)
-    if(!displayGrid.querySelector('.ship')) allShipsPlaced = true
+    if(!displayGrid.querySelector('.food')) allFoodPlaced = true
   }
 
-  function dragEnd() {
-    // console.log('dragend')
-  }
-
-  // Game Logic for MultiPlayer
   function playGameMulti(socket) {
     setupButtons.style.display = 'none'
     if(isGameOver) return
@@ -287,29 +254,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`${player} .ready`).classList.toggle('active')
   }
 
-  // Game Logic for Single Player
-  function playGameSingle() {
-    if (isGameOver) return
-    if (currentPlayer === 'user') {
-      infoDisplay.innerHTML = 'Your Go'
-      computerSquares.forEach(square => square.addEventListener('click', function(e) {
-        shotFired = square.dataset.id
-        revealSquare(square.classList)
-      }))
-    }
-    if (currentPlayer === 'enemy') {
-      infoDisplay.innerHTML = 'Computers Go'
-      setTimeout(enemyGo, 1000)
-    }
-  }
-
   let ingr0Count = 0
   let ingr1Count = 0
   let ingr2Count = 0
   let ingr3Count = 0
 
   function revealSquare(classList) {
-    const enemySquare = computerGrid.querySelector(`div[data-id='${shotFired}']`)
+    const enemySquare = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
     const obj = Object.values(classList)
     if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
       if (obj.includes('ingr0')) ingr0Count++
@@ -324,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkForWins()
     currentPlayer = 'enemy'
-    if(gameMode === 'singlePlayer') playGameSingle()
   }
 
   let oppIngr0Count = 0
@@ -334,7 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function enemyGo(square) {
-    if (gameMode === 'singlePlayer') square = Math.floor(Math.random() * userSquares.length)
     if (!userSquares[square].classList.contains('boom')) {
       const hit = userSquares[square].classList.contains('taken')
       userSquares[square].classList.add(hit ? 'boom' : 'miss')
@@ -343,14 +292,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (userSquares[square].classList.contains('ingr2')) oppIngr2Count++
       if (userSquares[square].classList.contains('ingr3')) oppIngr3Count++
       checkForWins()
-    } else if (gameMode === 'singlePlayer') enemyGo()
     currentPlayer = 'user'
     infoDisplay.innerHTML = 'Your Go'
+    }
   }
 
   function checkForWins() {
-    let enemy = 'computer'
-    if(gameMode === 'multiPlayer') enemy = 'enemy'
+    let enemy = 'enemy'
     if (ingr0Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr0`
       ingr0Count = 10
@@ -396,6 +344,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function gameOver() {
     isGameOver = true
-    startButton.removeEventListener('click', playGameSingle)
   }
 })
