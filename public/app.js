@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let player1Name = document.querySelector('#player1-name')  
   player1Name.innerHTML = localStorage["player1"]
+  // localStorage.clear()
+  let player2Name = document.querySelector('#player2-name')  
+  player2Name.innerHTML = 'enemy'
 
   const foodArray = [
     {
