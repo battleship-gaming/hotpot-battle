@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ingr3 = document.querySelector('.ingr3-container')
   const startButton = document.querySelector('#start')
   const rotateButton = document.querySelector('#rotate')
+  const resetButton = document.querySelector('#reset')
   const infoDisplay = document.querySelector('#info')
   const setupButtons = document.getElementById('setup-buttons')
   const userSquares = []
@@ -22,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let enemyReady = false
   let allFoodPlaced = false
   let shotFired = -1
+  let p1Score = 0
+  let p2Score = 0
   const foodArray = [
     {
       name: 'ingr0',
@@ -106,6 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', () => {
       if(allFoodPlaced) playGameMulti(socket)
       else infoDisplay.innerHTML = "Please place all ships"
+    })
+
+    resetButton.addEventListener('click', () => {
+      p1Score = 0
+      p2Score = 0
     })
 
     enemySquares.forEach(square => {
@@ -284,6 +292,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`${player} .ready`).classList.toggle('active')
   }
 
+  function playerScore(num) {
+    if(parseInt(num) === 0) p1Score += 1
+    if(parseInt(num) === 1) p2Score += 1
+    document.querySelector(`.p1 .score`).innerHTML = p1Score
+    document.querySelector(`.p2 .score`).innerHTML = p2Score
+  }
+
   let ingr0Count = 0
   let ingr1Count = 0
   let ingr2Count = 0
@@ -367,10 +382,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) === 40) {
       infoDisplay.innerHTML = "YOU WIN"
+      playerScore(0)
       gameOver()
     }
     if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) === 40) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
+      playerScore(1)
       gameOver()
     }
   }
