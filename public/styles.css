@@ -6,11 +6,17 @@ body {
 
   .index{
     background-image:url('firstpagebg.jpg');
-    z-index:1;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:0;
   }
   .multiplayer{
     background-image:url('hotpotbg.png');
-    z-index:1;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:0;
   }
 
   
@@ -20,7 +26,7 @@ body {
   }
   
   .btn1 {
-    font-size: 26px;
+    font-size: 30px;
     background-color: #409A53;
     cursor: pointer;
     padding: 0.5em;
@@ -30,7 +36,7 @@ body {
     border-radius: 4vmin;
     border: 2px solid; 
     cursor: pointer;
-    position: relative; left:1150px; top:840px;
+    position: relative; left:1150px; top:960px;
     width: 200px;
     height: 100px;
     z-index:2;
@@ -63,6 +69,7 @@ body {
     justify-content: center;
     width: 100%;
     z-index:2;
+    position: relative;
   }
   
   .hotpot-grid {
@@ -73,11 +80,13 @@ body {
     grid-template-rows: repeat(8, 6.5vmin);
     grid-template-columns: repeat(8, 6.5vmin);
     z-index:2;
+    position: relative;
   }
   
   .hotpot-grid div {
       border: 0.5px dashed black;
       z-index:2;
+      position: relative;
   }
   
   .grid-enemy > .taken,
@@ -140,6 +149,7 @@ body {
   .grid-display {
     display: flex;
     z-index:2;
+    position: relative;
   }
   
   .food > div {
