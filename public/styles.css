@@ -3,23 +3,67 @@ body {
     background-color: #F3F3F3;
     overflow-x: hidden;
   }
+
+  .index{
+    display: flex;
+    justify-content: center;
+    background-image:url('firstpagebg.jpg');
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:0;
+  }
+  .multiplayer{
+    background-image:url('hotpotbg.png');
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:0;
+  }
+
   
   *, *::before, *::after {
     font-family: 'Fredoka One', cursive;
     box-sizing: border-box;
   }
   
-  .btn {
+  .btn1 {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    margin-bottom: 17vh;
+    font-size: 30px;
+    background-color: #409A53;
+    padding: 0.5em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    color: #FFFFFF;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    height: 4rem;
+    z-index:2;
+    text-decoration: none;
+  }
+
+  .btn2 {
     font-size: inherit;
     background-color: #FFB800;
     cursor: pointer;
     padding: 0.5em;
+    margin: 4vmin 4vmin -1vmin 4vmin;
+    /* margin-top: 4vmin;
     margin-left: 2vmin;
-    margin-right: 2vmin;
+    margin-right: 4vmin; */
     color: #FF0000;
-    border-radius: 2vmin;
+    border-radius: 4vmin;
     border: 2px solid; 
     cursor: pointer;
+    z-index:2;
     text-decoration: none;
 
   }
@@ -27,11 +71,17 @@ body {
   .btn:hover, .btn:focus {
     background-color: #b98603;
   }
+
+  .btn2:hover, .btn2:focus {
+    background-color: #b98603;
+  }
   
   .container {
     display: flex;
     justify-content: center;
     width: 100%;
+    z-index:2;
+    position: relative;
   }
   
   .hotpot-grid {
@@ -41,10 +91,14 @@ body {
     opacity: 0.15;
     grid-template-rows: repeat(8, 6.5vmin);
     grid-template-columns: repeat(8, 6.5vmin);
+    z-index:2;
+    position: relative;
   }
   
   .hotpot-grid div {
       border: 0.5px dashed black;
+      z-index:2;
+      position: relative;
   }
   
   .grid-enemy > .taken,
@@ -106,6 +160,8 @@ body {
   
   .grid-display {
     display: flex;
+    z-index:2;
+    position: relative;
   }
   
   .food > div {
@@ -119,7 +175,7 @@ body {
     background-color: green;
     display: flex;
     flex-wrap: wrap;
-    margin: 2vmin;
+    margin: 0vmin 2vmin 0vmin 2vmin;
     border-radius: 2vmin;
   }
   
@@ -128,6 +184,7 @@ body {
   .ingr2-container,
   .ingr3-container {
     --width: 4;
+    z-index:3;
   }
   
   .ingr0-container-vertical,
@@ -136,6 +193,7 @@ body {
   .ingr3-container-vertical {
     --height: 4;
     --width: 1;
+    z-index:3;
   }
   
   .options {
