@@ -14,7 +14,13 @@
     <h1>Hotpot Battle</h1>
     <a href="/Multiplayer.html" class="btn">Multiplayer</a>
   </body>
-<audio controls loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+
+  <audio controls autoplay loop id="myaudio">
+    <source src="music.mp3" type="audio/mpeg">
+    <script>
+      var audio = document.getElementById("myaudio");
+      audio.volume = 0.2;
+    </script>
+  </audio>
+
 </html>

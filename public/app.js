@@ -398,4 +398,12 @@ document.addEventListener('DOMContentLoaded', () => {
     isGameOver = true
     startButton.removeEventListener('click', playGameSingle)
   }
+////
+
+let volume = document.getElementById("volume-slider");
+volume.addEventListener("change", function(e) {
+    audio.volume = e.currentTarget.value / 100;
+})
+
+
 })
