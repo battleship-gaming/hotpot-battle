@@ -104,8 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     startButton.addEventListener('click', () => {
-      if(allFoodPlaced) playGameMulti(socket)
-      else infoDisplay.innerHTML = "Please place all ships"
+      if(allFoodPlaced) {
+        playGameMulti(socket)
+        infoDisplay.innerHTML = ""
+      } else {
+        infoDisplay.innerHTML = "Please place all ships"
+      }
     })
 
     enemySquares.forEach(square => {
