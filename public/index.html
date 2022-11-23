@@ -30,7 +30,6 @@
         let greeting = document.querySelector('#greeting')
         greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
         sessionStorage.setItem('player1', p1NameInput.value)
-        console.log('playerIndex:', sessionStorage["playerIndex"])
         multiplayerBtn.style.display = "flex";
       }
       saveName.addEventListener('click', greetPlayer)
