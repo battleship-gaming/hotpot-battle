@@ -55,16 +55,13 @@ body {
   .taken,
   .ship {
     position: relative;
-  }
-  
-  .taken,
-  .ingr2-container {
     background-image: url("images/meat.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     --width: 4;
   }
+  
   
   .grid-display {
     display: flex;
@@ -118,14 +115,37 @@ body {
     --width: 4;
   }
   
-  .ingr0-container-vertical,
-  .ingr1-container-vertical,
-  .ingr2-container-vertical,
+  .ingr0-container-vertical {
+    background-image: url("images/aubergine.svg");
+    background-size: cover;
+    transform: rotate(90deg);
+    --height: 1;
+    --width: 4;
+
+  }
+
+  .ingr1-container-vertical {
+    background-image: url("images/fish.svg");
+    background-size: cover;
+    transform: rotate(90deg);
+    --height: 1;
+    --width: 4;
+  }
+
+
+  .ingr2-container-vertical {
+    --height: 1;
+    --width: 4;
+    background-image: url("images/meat.svg");
+    background-size: cover;
+    transform: rotate(90deg);
+
+
+  }
   .ingr3-container-vertical {
-    --height: 4;
-    --width: 1;
+    --height: 1;
+    --width: 4;
     background-image: url("images/springonion.svg");
-    position: absolute;
     background-size: cover;
     transform: rotate(90deg);
   }
