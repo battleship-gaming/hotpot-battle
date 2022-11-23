@@ -16,7 +16,7 @@ body {
     z-index:0;
   }
   .multiplayer{
-    background-image:url('hotpotbg.png');
+    background-image:url('twosoupbg.png');
     background-position: center;
     height: 100vh;
     position: relative;
@@ -63,6 +63,24 @@ body {
     z-index:2;
     text-decoration: none;
 
+  }
+
+  .btn3 {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    margin-bottom: 17vh;
+    font-size: 30px;
+    background-color: #409A53;
+    padding: 0.5em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    color: #FFFFFF;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    height: 4rem;
+    z-index:2;
   }
   
   .btn:hover, .btn:focus {
