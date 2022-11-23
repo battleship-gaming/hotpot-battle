@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(randomStarter === 1) {
           if(playerNum === 0) currentPlayer = "enemy"
           if(playerNum === 1) currentPlayer = "user"
-        } else {
+        }
+        if(randomStarter === 0) {
           if(playerNum === 0) currentPlayer = "user"
           if(playerNum === 1) currentPlayer = "enemy"
         }
@@ -350,49 +351,62 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ingr0Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr0`
       ingr0Count = 10
+      playerScore(0)
     }
     if (ingr1Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr1`
       ingr1Count = 10
+      playerScore(0)
     }
     if (ingr2Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr2`
       ingr2Count = 10
+      playerScore(0)
     }
     if (ingr3Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr3`
       ingr3Count = 10
+      playerScore(0)
     }
     if (oppIngr0Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr0`
       oppIngr0Count = 10
+      playerScore(1)
     }
     if (oppIngr1Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr1`
       oppIngr1Count = 10
+      playerScore(1)
     }
     if (oppIngr2Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr2`
       oppIngr2Count = 10
+      playerScore(1)
     }
     if (oppIngr3Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr3`
       oppIngr3Count = 10
+      playerScore(1)
     }
 
-    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) === 40) {
+    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 10) {
       infoDisplay.innerHTML = "YOU WIN"
-      playerScore(0)
-      gameOver()
     }
-    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) === 40) {
+    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 10) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
-      playerScore(1)
-      gameOver()
     }
   }
 
   function gameOver() {
-    isGameOver = true
+    userSquares = []
+    enemySquares = []
+    isHorizontal = true
+    ready = false
+    enemyReady = false
+    allFoodPlaced = false
+    createBoard(userGrid, userSquares)
+    createBoard(enemyGrid, enemySquares)
+    startMultiPlayer()
+    setupButtons.style.display = 'inline'
   }
 })
