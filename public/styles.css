@@ -112,7 +112,7 @@ body {
     margin: 2vmin;
     display: grid;
     background-color: #614833;
-    opacity: 0.15;
+    opacity: 0.35;
     grid-template-rows: repeat(8, 6.5vmin);
     grid-template-columns: repeat(8, 6.5vmin);
     z-index:2;
@@ -120,7 +120,7 @@ body {
   }
   
   .hotpot-grid div {
-      border: 0.5px dashed black;
+      border: 1px dashed black;
       z-index:2;
       position: relative;
   }
@@ -292,6 +292,10 @@ body {
   
   .player {
     margin: 2vmin;
+  }
+  #player-status {
+    justify-content: space-between;
+    /* padding: 0 10vw 0 10vw; */
   }
   
   .ready {
