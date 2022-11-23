@@ -25,12 +25,36 @@ body {
     z-index:0;
   }
 
-  
   *, *::before, *::after {
     font-family: 'Fredoka One', cursive;
     box-sizing: border-box;
   }
-  
+
+  #enter-name-container {
+    color: #409A53;
+    text-shadow: 0.2vh 0.2vh #ffffff;
+    position: relative;
+    top: 60vh;
+    font-size: 3.2vh;    
+  }
+    
+  #p1-name-input {
+    width: 25vw;
+    height: 5vh;
+    font-size: 4vh;
+    border: none;    
+    border-radius: 1vmin;
+    color: #409A53; 
+    box-shadow: 0.2vmin 0.2vmin;
+  }
+
+  #save-name {
+    margin: 1vmin;
+    padding: 0.2vmin;
+    width: 5vw;
+    height: 5vh;
+  }
+
   .btn1 {
     display: flex;
     align-items: center;

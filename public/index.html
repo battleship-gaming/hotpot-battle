@@ -15,26 +15,29 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body class=index>
-    <h3>Enter your name:</h3>
-    <input id="p1-name-input">
-    <button id="save-name" class="btn">OK</button>
-    <h2 id="greeting"></h2>    
+    <div id="enter-name-container">
+      <h2>Enter your name:</h2>
+      <input id="p1-name-input">
+      <button id="save-name" class="btn2">OK</button>
+      <h2 id="greeting"></h2> 
+    </div> 
+    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Multiplayer</a>      
     <script>
       const saveName = document.querySelector('#save-name')  
       const p1NameInput = document.querySelector('#p1-name-input')  
-      const multiplayerBtn = document.querySelector('#multiplayer-btn')  
+      const multiplayerBtn = document.getElementById('#multiplayer-btn')  
       function greetPlayer() {
         let greeting = document.querySelector('#greeting')
         greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
         sessionStorage.setItem('player1', p1NameInput.value)
         console.log('playerIndex:', sessionStorage["playerIndex"])
+        multiplayerBtn.style.display = "flex";
       }
       saveName.addEventListener('click', greetPlayer)
       function submitName() {
         console.log('playerIndex:', playerIndex)
       }
       multiplayerBtn.addEventListener('click', submitName)
-    </script>
-    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Multiplayer</a>
+    </script>    
   </body>
 </html>
