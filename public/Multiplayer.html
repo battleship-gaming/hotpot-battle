@@ -3,51 +3,51 @@
     <head>
         <meta charset="utf-8">
         <title>Hotpot Battle</title>
+        <script src="app.js" charset="utf-8"></script>
+
         <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
         <link rel="stylesheet" href="styles.css">
         <script src="/socket.io/socket.io.js"></script>
-        <script src="app.js" charset="utf-8"></script>
-        <!-- Press Start 2P Font -->
+        <!-- Fredoka One Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-        <script>
-        let gameMode = 'multiPlayer'
-        </script>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body class=multiplayer>
         <div class="container">
-        <div class="player p1">
-            Player 1
-            <div class="ready">Ready</div>
-        </div>
-        
-        <div class="player p2">
-            Player 2
-            <div class="ready">Ready</div>
-        </div>
-        </div>
+            <div class="player p1">
+                Player 1
+                <div class="ready">Ready</div>
+            </div>
+            
+            <div class="player p2">
+                Player 2
+                <div class="ready">Ready</div>
+            </div>
+            </div>
 
-        <div class="container">
-        <div class="hotpot-grid grid-user"></div>
-        <div class="hotpot-grid grid-opponent"></div>
+            <div class="container">
+            <div class="hotpot-grid grid-user"></div>
+            <div class="hotpot-grid grid-enemy"></div>
         </div>
 
         <div class="container options">
-        <div class="setup-buttons" id="setup-buttons">
-            <button id="start" class="btn">Start Game</button>
-            <button id="rotate" class="btn">Rotate Your Ships</button>
-        </div>
-        <h3 id="info" class="info-text"></h3>
+            <h3 id="info" class="info-text"></h3>
+            <progress value="0" max="10" id="progressBar"></progress>
+            <div class="setup-buttons" id="setup-buttons">
+                <button id="rotate" class="btn2">Rotate</button>
+                <button id="start" class="btn2">Ready</button>
+            </div>
+            <h3 id="info" class="info-text"></h3>
         </div>
 
         <div class="container">
-        <div class="grid-display">
-            <div class="ship ingr0-container" draggable="true"><div id="ingr0-0"></div><div id="ingr0-1"></div><div id="ingr0-2"></div><div id="ingr0-3"></div></div>
-            <div class="ship ingr1-container" draggable="true"><div id="ingr1-0"></div><div id="ingr1-1"></div><div id="ingr1-2"></div><div id="ingr1-3"></div></div>
-            <div class="ship ingr2-container" draggable="true"><div id="ingr2-0"></div><div id="ingr2-1"></div><div id="ingr2-2"></div><div id="ingr2-3"></div></div>
-            <div class="ship ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
-        </div>
+            <div class="grid-display">
+                <div class="food ingr0-container" draggable="true"><div id="ingr0-0"></div><div id="ingr0-1"></div><div id="ingr0-2"></div><div id="ingr0-3"></div></div>
+                <div class="food ingr1-container" draggable="true"><div id="ingr1-0"></div><div id="ingr1-1"></div><div id="ingr1-2"></div><div id="ingr1-3"></div></div>
+                <div class="food ingr2-container" draggable="true"><div id="ingr2-0"></div><div id="ingr2-1"></div><div id="ingr2-2"></div><div id="ingr2-3"></div></div>
+                <div class="food ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
+            </div>
         </div>
     </body>
 </html>
