@@ -136,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.emit('player-name', sessionStorage.getItem('player1'))
     socket.on('enemyName', enemyName => {
       let player2Name = document.querySelector('#player2-name')  
-      player2Name.innerHTML = enemyName              
+      player2Name.innerHTML = enemyName
+      sessionStorage.setItem('player2', enemyName)
       socket.emit('player-name', sessionStorage.getItem('player1'))   
     })
     
