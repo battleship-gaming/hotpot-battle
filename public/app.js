@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let shotFired = -1
 
   let player1Name = document.querySelector('#player1-name')  
-  if (sessionStorage.getItem('player1') == '') player1Name.innerHTML = 'You'
+  console.log('sesionstorage player1:',sessionStorage.getItem('player1'))
+  if (sessionStorage.getItem('player1') == null) player1Name.innerHTML = 'You'
   else player1Name.innerHTML = sessionStorage.getItem('player1')  
 
   const foodArray = [
@@ -137,9 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.emit('player-name', sessionStorage.getItem('player1'))
     socket.on('enemyName', enemyName => {
       let player2Name = document.querySelector('#player2-name')  
-      if (enemyName == '') player2Name.innerHTML = 'Your Hotpot Enemy'
-      else player2Name.innerHTML = enemyName
-      sessionStorage.setItem('player2', enemyName)
+      if (enemyName == null) {
+        player2Name.innerHTML = 'Your Hotpot Enemy'
+      } else {           
+        sessionStorage.setItem('player2', enemyName)
+        player2Name.innerHTML = enemyName     
+      }      
       socket.emit('player-name', sessionStorage.getItem('player1'))   
     })
     
