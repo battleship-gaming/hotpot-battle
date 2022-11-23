@@ -6,6 +6,8 @@ body {
 
   .index{
     background-image:url('firstpagebg.jpg');
+    background-position: center;
+    height: 100vh;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,6 +15,8 @@ body {
   }
   .multiplayer{
     background-image:url('hotpotbg.png');
+    background-position: center;
+    height: 100vh;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
