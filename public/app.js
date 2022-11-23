@@ -63,14 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('player-number', num => {
       if (num === -1) {
-        infoDisplay.innerHTML = "Sorry, the server is full"
+        infoDisplay.innerHTML = "The restaurant is full."
       } else {
         playerNum = parseInt(num)
         let randomStarter = (Math.random()>=0.5)? 1 : 0
-        if(randomStarter === 1 && playerNum === 0) { // For the first player, it is not guaranteed that they start first
-          currentPlayer = "enemy"
+        if(randomStarter === 1) {
+          if(playerNum === 0) currentPlayer = "enemy"
+          if(playerNum === 1) currentPlayer = "user"
         } else {
-          currentPlayer = "user"
+          if(playerNum === 0) currentPlayer = "user"
+          if(playerNum === 1) currentPlayer = "enemy"
         }
         console.log(currentPlayer)
         socket.emit('check-players')
@@ -99,10 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if(i !== playerReady) enemyReady = true
         }
       })
-    })
-
-    socket.on('timeout', () => {
-      infoDisplay.innerHTML = 'You have reached the 10 minute limit'
     })
 
     startButton.addEventListener('click', () => {
@@ -230,6 +228,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!displayGrid.querySelector('.food')) allFoodPlaced = true
   }
 
+  function turnColor() {
+    if(currentPlayer === 'user') {
+      document.querySelector(".p1").style.color = "green";
+      document.querySelector(".p2").style.color = "black";
+    }
+    if(currentPlayer === 'enemy') {
+      document.querySelector(".p1").style.color = "black";
+      document.querySelector(".p2").style.color = "green";
+    }
+  }
+
   function playGameMulti(socket) {
     setupButtons.style.display = 'none'
     if(isGameOver) return
@@ -240,13 +249,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(enemyReady) {
-      if(currentPlayer === 'user') {
-        infoDisplay.innerHTML = 'Your Go'
-      }
-      if(currentPlayer === 'enemy') {
-        infoDisplay.innerHTML = "Enemy's Go"
-      }
+      turnColor()
+      startTimer()
     }
+  }
+
+  var downloadTimer;
+  var timeleft;
+
+  function startTimer() {
+    timeleft = 10;
+    clearInterval(downloadTimer);
+    downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        if(currentPlayer === 'user') {
+          currentPlayer = 'enemy'
+          turnColor()
+          timeleft = 10
+        } else {
+          if(currentPlayer === 'enemy') {
+            currentPlayer = 'user'
+            turnColor()
+            timeleft = 10
+          }
+        }
+      }
+      document.getElementById("progressBar").value = timeleft;
+      timeleft -= 1;
+    }, 1000);
   }
 
   function playerReady(num) {
@@ -260,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let ingr3Count = 0
 
   function revealSquare(classList) {
+    console.log(classList)
     const enemySquare = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
     const obj = Object.values(classList)
     if (!enemySquare.classList.contains('boom') && currentPlayer === 'user' && !isGameOver) {
@@ -275,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkForWins()
     currentPlayer = 'enemy'
+    turnColor()
+    startTimer()
   }
 
   let oppIngr0Count = 0
@@ -293,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (userSquares[square].classList.contains('ingr3')) oppIngr3Count++
       checkForWins()
     currentPlayer = 'user'
-    infoDisplay.innerHTML = 'Your Go'
+    startTimer()
     }
   }
 
