@@ -47,6 +47,7 @@ body {
     cursor: pointer;
     height: 4rem;
     z-index:2;
+    text-decoration: none;
   }
 
   .btn2 {
@@ -54,10 +55,12 @@ body {
     background-color: #FFB800;
     cursor: pointer;
     padding: 0.5em;
+    margin: 4vmin 4vmin -1vmin 4vmin;
+    /* margin-top: 4vmin;
     margin-left: 2vmin;
-    margin-right: 2vmin;
+    margin-right: 4vmin; */
     color: #FF0000;
-    border-radius: 2vmin;
+    border-radius: 4vmin;
     border: 2px solid; 
     cursor: pointer;
     z-index:2;
@@ -172,7 +175,7 @@ body {
     background-color: green;
     display: flex;
     flex-wrap: wrap;
-    margin: 2vmin;
+    margin: 0vmin 2vmin 0vmin 2vmin;
     border-radius: 2vmin;
   }
   
