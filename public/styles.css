@@ -5,6 +5,8 @@ body {
   }
 
   .index{
+    display: flex;
+    justify-content: center;
     background-image:url('firstpagebg.jpg');
     background-position: center;
     height: 100vh;
@@ -30,9 +32,12 @@ body {
   }
   
   .btn1 {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    margin-bottom: 17vh;
     font-size: 30px;
     background-color: #409A53;
-    cursor: pointer;
     padding: 0.5em;
     margin-left: 2vmin;
     margin-right: 2vmin;
@@ -40,9 +45,7 @@ body {
     border-radius: 4vmin;
     border: 2px solid; 
     cursor: pointer;
-    position: relative; left:1150px; top:960px;
-    width: 200px;
-    height: 100px;
+    height: 4rem;
     z-index:2;
   }
 
