@@ -3,40 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title>Hotpot Battle</title>
-    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <!-- Fredoka One Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
-    <script src="server.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body class=index>
     <div id="enter-name-container">
+      <div id="client-number">cock</div>
       <h2>Enter your name:</h2>
       <input id="p1-name-input">
       <button id="save-name" class="btn2">OK</button>
       <h2 id="greeting"></h2> 
     </div> 
-    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Multiplayer</a>      
+    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Multiplayer</a>
+    
     <script>
-      const saveName = document.querySelector('#save-name')  
-      const p1NameInput = document.querySelector('#p1-name-input')  
-      const multiplayerBtn = document.getElementById('#multiplayer-btn')  
+      const socket = io();
+      socket.on('client-number', num => {
+        document.querySelector('#client-number').innerHTML = "Customers: "+ num
+      })
+
+      const saveName = document.querySelector('#save-name')
+      const p1NameInput = document.querySelector('#p1-name-input')
+      const multiplayerBtn = document.getElementById('#multiplayer-btn')
+
       function greetPlayer() {
         let greeting = document.querySelector('#greeting')
         greeting.innerHTML = "Welcome, "+p1NameInput.value+"!"
         sessionStorage.setItem('player1', p1NameInput.value)
         multiplayerBtn.style.display = "flex";
       }
+
       saveName.addEventListener('click', greetPlayer)
+      
       function submitName() {
         console.log('playerIndex:', playerIndex)
       }
+      
       multiplayerBtn.addEventListener('click', submitName)
-    </script>    
+    </script>
   </body>
 </html>

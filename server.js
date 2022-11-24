@@ -10,18 +10,18 @@ const io = socketio(server)
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")))
 
+app.listen(3000, '0.0.0.0', function() {
+  console.log('Listening to port:  ' + 3000);
+});
+
 // Start server
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 // Handle a socket connection request from web client
 const connections = [null, null]
 let clientNo = 0
-const users = []
 
 io.on('connection', socket => {
-  clientNo++;
-  socket.join(Math.round(clientNo/2));
-  users.push(clientNo)
   // Find an available player number
   let playerIndex = -1;
   for (const i in connections) {
@@ -31,8 +31,11 @@ io.on('connection', socket => {
     }
   }
 
+  socket.broadcast.emit('client-number', clientNo);
+
   // Tell the connecting client what player number they are
-  socket.emit('player-number', playerIndex)
+  socket.broadcast.emit('player-number', playerIndex)
+  console.log(`player number ${clientNo}`)
   
   console.log(`Player ${playerIndex} has connected`)
 
@@ -48,7 +51,7 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log(`Player ${playerIndex} disconnected`)
     connections[playerIndex] = null
-    //Tell everyone what player numbe just disconnected
+    //Tell everyone what player number just disconnected
     socket.broadcast.emit('player-connection', playerIndex)
   })
 
