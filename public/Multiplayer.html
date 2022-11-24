@@ -49,19 +49,18 @@
                 <div class="food ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
             </div>
         </div>
+        <div class="slidecontainer">
+            Low Temp.
+            <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
+            High Temp.
+        </div>
     </body>
 
     <audio controls autoplay loop hidden id="myaudio">
-        <source src="music2.mp3" type="audio/mpeg">
-        <script>
-          var audio = document.getElementById("myaudio");
-          audio.volume = 0.2;
-        </script>
-      </audio>
-
-    <div class="slidecontainer" style = "position:relative; left:950px; top:50px">
-        Low Temp.
-      <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
-        High Temp.
-    </div>
+    <source src="music2.mp3" type="audio/mpeg">
+    <script>
+        var audio = document.getElementById("myaudio");
+        audio.volume = 0.2;
+    </script>
+    </audio>
 </html>

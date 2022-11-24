@@ -307,7 +307,7 @@ body {
 
   .slider {
     -webkit-appearance: none;
-    width: 15%;
+    width: 10vw;
     height: 15px;
     border-radius: 5px;  
     background: #d3d3d3;
@@ -335,5 +335,7 @@ body {
     cursor: pointer;
   }
 
-  
-
+  .slidecontainer {
+    position: absolute;
+    right: 0px;
+  }
