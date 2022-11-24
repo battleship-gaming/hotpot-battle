@@ -38,7 +38,9 @@ io.on('connection', socket => {
   socket.broadcast.emit('client-number', users)
 
   // Tell the connecting client what player number they are
-  socket.broadcast.emit('player-number', playerIndex)
+  if (playerIndex == 0)
+    randomStarter = (Math.random()>=0.5)? 1:0
+  socket.emit('player-number', [playerIndex,randomStarter])
   console.log(`player number ${playerIndex}`)
   
   console.log(`Player ${playerIndex} has connected`)

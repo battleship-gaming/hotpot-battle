@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playerNum = parseInt(num)
         console.log('playerNum:', playerNum)
         console.log('randomStarter:', randomStarter)
-        if(randomStarter !== playerNum) currentPlayer = "enemy"
+        if(randomStarter != playerNum) currentPlayer = "enemy"
         console.log('currentPlayer:', currentPlayer)
         socket.emit('check-players')
       }
