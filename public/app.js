@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {  
   const userGrid = document.querySelector('.grid-user')
   const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ingr3 = document.querySelector('.ingr3-container')
   const startButton = document.querySelector('#start')
   const rotateButton = document.querySelector('#rotate')
+  const resetButton = document.querySelector('#reset')
   const infoDisplay = document.querySelector('#info')
   const setupButtons = document.getElementById('setup-buttons')
   const userSquares = []
@@ -22,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let enemyReady = false
   let allFoodPlaced = false
   let shotFired = -1
+  let p1Score = 0
+  let p2Score = 0
+
+  let player1Name = document.querySelector('#player1-name')  
+  console.log('sesionstorage player1:',sessionStorage.getItem('player1'))
+  if (sessionStorage.getItem('player1') == null) player1Name.innerHTML = 'You'
+  else player1Name.innerHTML = sessionStorage.getItem('player1')  
+
   const foodArray = [
     {
       name: 'ingr0',
@@ -70,15 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if(randomStarter === 1) {
           if(playerNum === 0) currentPlayer = "enemy"
           if(playerNum === 1) currentPlayer = "user"
-        } else {
+        }
+        if(randomStarter === 0) {
           if(playerNum === 0) currentPlayer = "user"
           if(playerNum === 1) currentPlayer = "enemy"
         }
         console.log(currentPlayer)
         socket.emit('check-players')
       }
-    })
-
+    })    
+    
     socket.on('player-connection', num => {
       console.log(`Player number ${num} has connected or disconnected`)
       playerConnectedOrDisconnected(num)
@@ -108,6 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
       else infoDisplay.innerHTML = "Please place all ships"
     })
 
+    resetButton.addEventListener('click', () => {
+      p1Score = 0
+      p2Score = 0
+    })
+
     enemySquares.forEach(square => {
       square.addEventListener('click', () => {
         if(currentPlayer === 'user' && ready && enemyReady) {
@@ -128,6 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
       revealSquare(classList)
       playGameMulti(socket)
     })
+
+    socket.emit('player-name', sessionStorage.getItem('player1'))
+    socket.on('enemyName', enemyName => {
+      let player2Name = document.querySelector('#player2-name')  
+      if (enemyName == null) {
+        player2Name.innerHTML = 'Your Hotpot Enemy'
+      } else {           
+        sessionStorage.setItem('player2', enemyName)
+        player2Name.innerHTML = enemyName     
+      }      
+      socket.emit('player-name', sessionStorage.getItem('player1'))   
+    })
+    
 
     function playerConnectedOrDisconnected(num) {
       let player = `.p${parseInt(num) + 1}`
@@ -284,6 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(`${player} .ready`).classList.toggle('active')
   }
 
+  function playerScore(num) {
+    if(parseInt(num) === 0) p1Score += 1
+    if(parseInt(num) === 1) p2Score += 1
+    document.querySelector(`.p1 .score`).innerHTML = p1Score
+    document.querySelector(`.p2 .score`).innerHTML = p2Score
+  }
+
   let ingr0Count = 0
   let ingr1Count = 0
   let ingr2Count = 0
@@ -335,47 +370,70 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ingr0Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr0`
       ingr0Count = 10
+      playerScore(0)
     }
     if (ingr1Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr1`
       ingr1Count = 10
+      playerScore(0)
     }
     if (ingr2Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr2`
       ingr2Count = 10
+      playerScore(0)
     }
     if (ingr3Count === 4) {
       infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr3`
       ingr3Count = 10
+      playerScore(0)
     }
     if (oppIngr0Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr0`
       oppIngr0Count = 10
+      playerScore(1)
     }
     if (oppIngr1Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr1`
       oppIngr1Count = 10
+      playerScore(1)
     }
     if (oppIngr2Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr2`
       oppIngr2Count = 10
+      playerScore(1)
     }
     if (oppIngr3Count === 4) {
       infoDisplay.innerHTML = `${enemy} sunk your ingr3`
       oppIngr3Count = 10
+      playerScore(1)
     }
 
-    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) === 40) {
+    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 10) {
       infoDisplay.innerHTML = "YOU WIN"
-      gameOver()
     }
-    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) === 40) {
+    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 10) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
-      gameOver()
     }
   }
 
   function gameOver() {
-    isGameOver = true
+    userSquares = []
+    enemySquares = []
+    isHorizontal = true
+    ready = false
+    enemyReady = false
+    allFoodPlaced = false
+    createBoard(userGrid, userSquares)
+    createBoard(enemyGrid, enemySquares)
+    startMultiPlayer()
+    setupButtons.style.display = 'inline'
   }
+////
+
+let volume = document.getElementById("volume-slider");
+volume.addEventListener("change", function(e) {
+    audio.volume = e.currentTarget.value / 100;
+})
+
+
 })
