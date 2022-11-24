@@ -113,6 +113,53 @@ body {
   background-color: #b98603;
 }
 
+.chef {
+  width: 300px;
+  height: 300px;
+  position:relative;
+  background-image: url("chef1.svg");
+  background-size:60%;
+  background-position:left;
+  bottom: 0;
+  left: 5px;
+  background-repeat: no-repeat;
+  
+
+}
+
+.bubble {
+  background-color: #FFB800;
+  color: black;
+  padding: 0.5em 1em;
+  position: relative;
+  border-radius: 0 0.25em 0.25em 0.25em;
+  box-shadow: 7px 30px 40px #664400;
+  transition: 0.5s;
+  animation: speech .7s linear 1;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  border: 0.5em solid transparent;
+  border-bottom-color: #FFB800;
+  border-right-color: #FFB800;
+  right: 100%;
+  top: 0%;
+  transform: skewY(45deg);
+  transform-origin: 100% 100%;
+
+}
+
+@keyframes speech {
+  0% { top: -20px; }
+  25% { top: 5px ; box-shadow: 7px 40px 40px #664400;}
+  50% { top: 20px; }
+  75% { top: -20px ; box-shadow: 7px -10px 50px #664400;}
+  100% { top: 0; }
+}
+
+
 .container {
   display: flex;
   justify-content: center;
