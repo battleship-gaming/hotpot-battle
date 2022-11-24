@@ -13,13 +13,24 @@
     <script src="server.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script> 
+      function choosetwosoup(){
+        sessionStorage.setItem('bg', url('twoesoupbg.png'))
+      }
+      function chooseonesoup(){
+        sessionStorage.setItem('bg', url('onesoupbg.png'))
+      }
+      function choosegrill(){
+        sessionStorage.setItem('bg', url('grillbg.png'))
+      }
+   </script>
   </head>
   <body class=index>
     <h1 class="chooseyourpottext">Choose your pot:</h1>
     <ul class="choosepot">
-      <a  class="btn3" id="twosoup">two soup</a>
-      <a  class="btn3" id="onesoup">one soup</a>
-      <a  class="btn3" id="grill">grill</a>
+      <button class="btn3" id="twosoup" onclick=choosetwosoup()>two soup</button>
+      <button  class="btn3" id="onesoup" onclick=chooseonesoup()>one soup</button>
+      <a  class="btn3" id="grill" onclick=choosegrill()>grill</a>
     </ul>
     <div id="enter-name-container">
       <h2>Enter your name:</h2>
