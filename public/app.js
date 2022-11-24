@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {  
   const userGrid = document.querySelector('.grid-user')
   const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let enemyReady = false
   let allFoodPlaced = false
   let shotFired = -1
+
+  let player1Name = document.querySelector('#player1-name')  
+  console.log('sesionstorage player1:',sessionStorage.getItem('player1'))
+  if (sessionStorage.getItem('player1') == null) player1Name.innerHTML = 'You'
+  else player1Name.innerHTML = sessionStorage.getItem('player1')  
+
   const foodArray = [
     {
       name: 'ingr0',
@@ -77,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(currentPlayer)
         socket.emit('check-players')
       }
-    })
-
+    })    
+    
     socket.on('player-connection', num => {
       console.log(`Player number ${num} has connected or disconnected`)
       playerConnectedOrDisconnected(num)
@@ -128,6 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
       revealSquare(classList)
       playGameMulti(socket)
     })
+
+    socket.emit('player-name', sessionStorage.getItem('player1'))
+    socket.on('enemyName', enemyName => {
+      let player2Name = document.querySelector('#player2-name')  
+      if (enemyName == null) {
+        player2Name.innerHTML = 'Your Hotpot Enemy'
+      } else {           
+        sessionStorage.setItem('player2', enemyName)
+        player2Name.innerHTML = enemyName     
+      }      
+      socket.emit('player-name', sessionStorage.getItem('player1'))   
+    })
+    
 
     function playerConnectedOrDisconnected(num) {
       let player = `.p${parseInt(num) + 1}`
