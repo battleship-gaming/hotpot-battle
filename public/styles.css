@@ -688,7 +688,6 @@ body {
   }
   #player-status {
     justify-content: space-between;
-    /* padding: 0 10vw 0 10vw; */
   }
   
   .ready {
@@ -702,41 +701,26 @@ body {
       text-decoration: none;
   } 
 
-.player {
-  margin: 2vmin;
-}
-
-.ready {
-  font-weight: normal;
-  opacity: .25;
-  text-decoration: line-through;
-}
-
-.ready.active {
-  opacity: 1;
-  text-decoration: none;
-} 
-
-progress {
-  border: none;
-  width: 400px;
-  height: 60px;
-  background: crimson;
-}
-
-progress {
-  color: crimson;
-  height: 0.75rem;
-}
-
-progress::-moz-progress-bar {
-  background: hsl(0, 0%, 80%);
-}
-
-progress::-webkit-progress-value {
-  background: crimson;
-}
-
-progress::-webkit-progress-bar {
-  background: hsl(0, 0%, 80%);
-}
+    progress {
+    border: none;
+    width: 400px;
+    height: 60px;
+    background: crimson;
+  }
+  
+  progress {
+    color: crimson;
+    height: 0.75rem;
+  }
+  
+  progress::-moz-progress-bar {
+    background: hsl(0, 0%, 80%);
+  }
+  
+  progress::-webkit-progress-value {
+    background: crimson;
+  }
+  
+  progress::-webkit-progress-bar {
+    background: hsl(0, 0%, 80%);
+  }
