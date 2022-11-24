@@ -110,7 +110,15 @@ body {
   border: 2px solid; 
   cursor: pointer;
   text-decoration: none;
+}
 
+.clients {
+  position: relative;
+  font-size: 3vh;    
+}
+
+.grid-display {
+  display: flex;
 }
 
 .btn:hover, .btn:focus, .btn2:hover, .btn2:focus {
