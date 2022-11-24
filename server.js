@@ -6,6 +6,7 @@ const socketio = require('socket.io')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+let randomStarter
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")))
@@ -32,7 +33,8 @@ io.on('connection', socket => {
   }
 
   // Tell the connecting client what player number they are
-  socket.emit('player-number', playerIndex)
+  if (playerIndex == 0) randomStarter = Math.random()>=0.5? 1:0
+  socket.emit('player-number', [playerIndex,randomStarter])
   
   console.log(`Player ${playerIndex} has connected`)
 
