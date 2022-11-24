@@ -76,16 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
       playerNum = parseInt(num)
 
-      // let randomStarter = (Math.random()>=0.5)? 1 : 0
       console.log('playerNum', playerNum)  
-      console.log('randomStarter', randomStarter)       
-      // if(randomStarter === 1) {
-      //   if(playerNum === 0) currentPlayer = "enemy"
-      //   if(playerNum === 1) currentPlayer = "user"
-      // } else {
-      //   if(playerNum === 0) currentPlayer = "user"
-      //   if(playerNum === 1) currentPlayer = "enemy"
-      // }                
+      console.log('randomStarter', randomStarter)    
       if (randomStarter !== playerNum) currentPlayer = "enemy"
       console.log('currentPlayer',currentPlayer)
       socket.emit('check-players')
@@ -310,8 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function playerReady(num) {
-    let player = `.p${parseInt(num) + 1}`
-    document.querySelector(`${player} .ready`).classList.toggle('active')
+    // let player = `.p${parseInt(num) + 1}`
+    // document.querySelector(`${player} .ready`).classList.toggle('active')
+    let playerNum = parseInt(num)
+    if (playerNum == 0) {
+      
+    }
+      document.querySelector('.p1.ready').classList.toggle('active')
+    
   }
 
   let ingr0Count = 0
