@@ -272,13 +272,26 @@ body {
   
   .ready {
       font-weight: normal;
-      opacity: .25;
-      text-decoration: line-through;
+      opacity: .60;
+      weight: 3vw;
+      height: 3vh;
+      border-radius: 1.5vmin;
+      background-color: grey;
+      color: darkgrey;
+      padding: 0 0.5vw 0 0.5vw;
+      font-size: 2vh;
   }
   
   .ready.active {
+      font-weight: normal;
       opacity: 1;
-      text-decoration: none;
+      weight: 3vw;
+      height: 3vh;
+      border-radius: 1.5vmin;
+      background-color: green;
+      color: white;
+      padding: 0 0.5vw 0 0.5vw;
+      font-size: 2vh;
   } 
 
   progress {
