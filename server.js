@@ -6,6 +6,7 @@ const socketio = require('socket.io')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+let randomStarter
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")))
