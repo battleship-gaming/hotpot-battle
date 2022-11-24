@@ -388,6 +388,7 @@ progress::-webkit-progress-bar {
   margin: 0 auto;
   padding: 0px;
   text-align: center;
+  z-index:2;
 }
 
 .button {
@@ -480,4 +481,9 @@ progress::-webkit-progress-bar {
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
+}
+
+.smbutton {
+  background-color: #555555;
+  color:white;
 }
