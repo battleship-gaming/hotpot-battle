@@ -6,6 +6,7 @@ const socketio = require('socket.io')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+let randomStarter
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")))
@@ -15,10 +16,13 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 // Handle a socket connection request from web client
 const connections = [null, null]
+let clientNo = 0
+const users = []
 
 io.on('connection', socket => {
-  // console.log('New WS Connection')
-
+  clientNo++;
+  socket.join(Math.round(clientNo/2));
+  users.push(clientNo)
   // Find an available player number
   let playerIndex = -1;
   for (const i in connections) {
@@ -29,8 +33,9 @@ io.on('connection', socket => {
   }
 
   // Tell the connecting client what player number they are
-  socket.emit('player-number', playerIndex)
-
+  if (playerIndex == 0) randomStarter = Math.random()>=0.5? 1:0
+  socket.emit('player-number', [playerIndex,randomStarter])
+  
   console.log(`Player ${playerIndex} has connected`)
 
   // Ignore player 3
@@ -79,4 +84,15 @@ io.on('connection', socket => {
     // Forward the reply to the other player
     socket.broadcast.emit('fire-reply', square)
   })
+
+  socket.on('player-name', playerName => {
+    socket.broadcast.emit('enemyName', playerName)
+  })
+
+  // Timeout connection
+  setTimeout(() => {
+    connections[playerIndex] = null
+    socket.emit('timeout')
+    socket.disconnect()
+  }, 600000) // 10 minute limit per player
 })
