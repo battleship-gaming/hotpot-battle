@@ -382,3 +382,102 @@ progress::-webkit-progress-bar {
   position: absolute;
   right: 0px;
 }
+
+.box {
+  width: 0%;
+  margin: 0 auto;
+  padding: 0px;
+  text-align: center;
+}
+
+.button {
+  font-size: inherit;
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  border: 2px solid #FF0000;
+  border-radius: 50px/50px;
+  background: #FFB800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #b98603;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #FFB800;
+  border-radius: 5px;
+  width: 20%;
+  position: absolute;
+  transition: all 5s ease-in-out;
+  color: #FF0000;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #FF0000;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #b98603;
+  z-index:2;
+}
+.popup .close:hover {
+  color: #FF0000;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.glow {
+  font-size: 50px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
