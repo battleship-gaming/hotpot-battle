@@ -110,11 +110,53 @@ body {
   .taken,
   .food {
     position: relative;
-    background-image: url("images/meat.svg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: hsl(0, 0%, 80%);
     --width: 4;
+  }
+    
+  .taken.start.vertical,
+  .taken.start.vertical::before {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+  }
+  
+  .taken.end.vertical,
+  .taken.end.vertical::before {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .taken.start.horizontal,
+  .taken.start.horizontal::before {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  
+  .taken.end.horizontal,
+  .taken.end.horizontal::before {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .taken.vertical::before,
+  .taken.horizontal::before {
+    content: '';
+    position: absolute;
+    border: .3vmin solid white;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+  }
+  
+  .taken.horizontal::before {
+    border-left: none;
+    border-right: none;
+  }
+  
+  .taken.vertical::before {
+    border-top: none;
+    border-bottom: none;
   }
   
   
@@ -170,43 +212,45 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     --width: 4;
-    z-index:3;
   }
   
   .ingr0-container-vertical {
-    background-image: url("images/aubergine.svg");
+    background-image: url("images/aubergine_vertical.svg");
     background-size: cover;
-    transform: rotate(90deg);
-    --height: 1;
-    --width: 4;
+    background-repeat: no-repeat;
+    background-position: center;
+    --height: 4;
+    --width: 1;
 
   }
 
   .ingr1-container-vertical {
-    background-image: url("images/fish.svg");
+    background-image: url("images/fish_vertical.svg");
     background-size: cover;
-    transform: rotate(90deg);
-    --height: 1;
-    --width: 4;
+    background-repeat: no-repeat;
+    background-position: center;
+    --height: 4;
+    --width: 1;
   }
 
 
   .ingr2-container-vertical {
-    --height: 1;
-    --width: 4;
-    background-image: url("images/meat.svg");
+    background-image: url("images/meat_vertical.svg");
     background-size: cover;
-    transform: rotate(90deg);
+    background-repeat: no-repeat;
+    background-position: center;
+    --height: 4;
+    --width: 1;
 
 
   }
   .ingr3-container-vertical {
-    --height: 1;
-    --width: 4;
-    background-image: url("images/springonion.svg");
+    background-image: url("images/springonion_vertical.svg");
     background-size: cover;
-    transform: rotate(90deg);
-    z-index:3;
+    background-repeat: no-repeat;
+    background-position: center;
+    --height: 4;
+    --width: 1;
   }
   
   .options {
