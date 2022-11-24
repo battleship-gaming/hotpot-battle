@@ -253,17 +253,16 @@ body {
 }
 
 .ingr0-container-vertical {
-  background-image: url("images/aubergine_vertical.svg");
+  background-image: url("aubergine_vertical.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   --height: 4;
   --width: 1;
-
 }
 
 .ingr1-container-vertical {
-  background-image: url("images/fish_vertical.svg");
+  background-image: url("fish_vertical.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -273,7 +272,7 @@ body {
 
 
 .ingr2-container-vertical {
-  background-image: url("images/meat_vertical.svg");
+  background-image: url("meat_vertical.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -283,7 +282,7 @@ body {
 
 }
 .ingr3-container-vertical {
-  background-image: url("images/springonion_vertical.svg");
+  background-image: url("springonion_vertical.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
