@@ -253,10 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function turnColor() {
     if(currentPlayer === 'user') {
       document.querySelector(".p1").style.color = "green";
-      document.querySelector(".p2").style.color = "black";
+      document.querySelector(".p2").style.color = "grey";
     }
     if(currentPlayer === 'enemy') {
-      document.querySelector(".p1").style.color = "black";
+      document.querySelector(".p1").style.color = "grey";
       document.querySelector(".p2").style.color = "green";
     }
   }
@@ -303,13 +303,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function playerReady(num) {
     // let player = `.p${parseInt(num) + 1}`
-    // document.querySelector(`${player} .ready`).classList.toggle('active')
-    let playerNum = parseInt(num)
-    if (playerNum == 0) {
-      
+    // // document.querySelector(`${player} .ready`).classList.toggle('active')
+    // let playerNum = parseInt(num)
+    if (ready) document.querySelector('.p1 .ready').classList.toggle('active')
+    else if (enemyReady) document.querySelector('.p2 .ready').classList.toggle('active')
+    else if (ready && enemyReady) {
+      document.querySelector('.p1 .ready').classList.toggle('active')
+      document.querySelector('.p2 .ready').classList.toggle('active')
     }
-      document.querySelector('.p1.ready').classList.toggle('active')
-    
   }
 
   let ingr0Count = 0

@@ -292,7 +292,6 @@ body {
   }
   #player-status {
     justify-content: space-between;
-    /* padding: 0 10vw 0 10vw; */
   }
   
   .ready {
