@@ -81,4 +81,15 @@ io.on('connection', socket => {
     // Forward the reply to the other player
     socket.broadcast.emit('fire-reply', square)
   })
+
+  socket.on('player-name', playerName => {
+    socket.broadcast.emit('enemyName', playerName)
+  })
+
+  // Timeout connection
+  setTimeout(() => {
+    connections[playerIndex] = null
+    socket.emit('timeout')
+    socket.disconnect()
+  }, 600000) // 10 minute limit per player
 })

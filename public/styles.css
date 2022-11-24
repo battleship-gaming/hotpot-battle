@@ -25,12 +25,36 @@ body {
     z-index:0;
   }
 
-  
   *, *::before, *::after {
     font-family: 'Fredoka One', cursive;
     box-sizing: border-box;
   }
-  
+
+  #enter-name-container {
+    color: #409A53;
+    text-shadow: 0.2vh 0.2vh #ffffff;
+    position: relative;
+    top: 60vh;
+    font-size: 3.2vh;    
+  }
+    
+  #p1-name-input {
+    width: 25vw;
+    height: 5vh;
+    font-size: 4vh;
+    border: none;    
+    border-radius: 1vmin;
+    color: #409A53; 
+    box-shadow: 0.2vmin 0.2vmin;
+  }
+
+  #save-name {
+    margin: 1vmin;
+    padding: 0.2vmin;
+    width: 5vw;
+    height: 5vh;
+  }
+
   .btn1 {
     display: flex;
     align-items: center;
@@ -85,7 +109,7 @@ body {
     margin: 2vmin;
     display: grid;
     background-color: #614833;
-    opacity: 0.15;
+    opacity: 0.35;
     grid-template-rows: repeat(8, 6.5vmin);
     grid-template-columns: repeat(8, 6.5vmin);
     z-index:2;
@@ -93,7 +117,7 @@ body {
   }
   
   .hotpot-grid div {
-      border: 0.5px dashed black;
+      border: 1px dashed black;
       z-index:2;
       position: relative;
   }
@@ -265,6 +289,10 @@ body {
   
   .player {
     margin: 2vmin;
+  }
+  #player-status {
+    justify-content: space-between;
+    /* padding: 0 10vw 0 10vw; */
   }
   
   .ready {

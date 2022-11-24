@@ -5,8 +5,8 @@ We are using yarn (instead of npm) so here's the commands to use:
 npm install --global yarn
 ### Set up:
 yarn install --frozen-lockfile
-### To open the app:
-Open index.html with Live Server
+### Run the game:
+yarn run dev, then open localhost:3000
 ## Git commands
 Create a new branch :<br>
 &emsp;&emsp;git checkout -b your-branch-name<br><br>
