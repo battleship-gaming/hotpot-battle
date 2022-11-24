@@ -15,10 +15,13 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 // Handle a socket connection request from web client
 const connections = [null, null]
+let clientNo = 0
+const users = []
 
 io.on('connection', socket => {
-  // console.log('New WS Connection')
-
+  clientNo++;
+  socket.join(Math.round(clientNo/2));
+  users.push(clientNo)
   // Find an available player number
   let playerIndex = -1;
   for (const i in connections) {
