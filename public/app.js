@@ -70,21 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function startMultiPlayer() {
     const socket = io();
 
-    socket.on('player-number', num => {
+    socket.on('player-number', numAndStarter => {
+      let num = numAndStarter[0]
+      let randomStarter = numAndStarter[1]
       if (num === -1) {
         infoDisplay.innerHTML = "The restaurant is full."
       } else {
         playerNum = parseInt(num)
-        let randomStarter = (Math.random()>=0.5)? 1 : 0
-        if(randomStarter === 1) {
-          if(playerNum === 0) currentPlayer = "enemy"
-          if(playerNum === 1) currentPlayer = "user"
-        }
-        if(randomStarter === 0) {
-          if(playerNum === 0) currentPlayer = "user"
-          if(playerNum === 1) currentPlayer = "enemy"
-        }
-        console.log(currentPlayer)
+        console.log('playerNum:', playerNum)
+        console.log('randomStarter:', randomStarter)
+        if(randomStarter !== playerNum) currentPlayer = "enemy"
+        console.log('currentPlayer:', currentPlayer)
         socket.emit('check-players')
       }
     })    

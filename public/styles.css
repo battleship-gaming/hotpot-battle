@@ -2,7 +2,7 @@ body {
     margin: 0;
     background-color: #F3F3F3;
     overflow-x: hidden;
-  }
+}
 
 .index {
   display: flex;
@@ -15,6 +15,7 @@ body {
   background-size: cover;
   z-index:0;
 }
+
 .multiplayer {
   background-image:url('hotpotbg.png');
   background-position: center;
@@ -25,10 +26,34 @@ body {
   z-index:1;
 }
 
-
 *, *::before, *::after {
   font-family: 'Fredoka One', cursive;
   box-sizing: border-box;
+}
+
+#enter-name-container {
+  color: #409A53;
+  text-shadow: 0.2vh 0.2vh #ffffff;
+  position: relative;
+  top: 60vh;
+  font-size: 3.2vh;    
+}
+  
+#p1-name-input {
+  width: 25vw;
+  height: 5vh;
+  font-size: 4vh;
+  border: none;    
+  border-radius: 1vmin;
+  color: #409A53; 
+  box-shadow: 0.2vmin 0.2vmin;
+}
+
+#save-name {
+  margin: 1vmin;
+  padding: 0.2vmin;
+  width: 5vw;
+  height: 5vh;
 }
 
 .btn1 {
@@ -84,169 +109,7 @@ body {
 
 }
 
-.btn:hover, .btn:focus {
-  background-color: #b98603;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.hotpot-grid {
-  margin: 2vmin;
-  display: grid;
-  background-color: #614833;
-  opacity: 0.15;
-  grid-template-rows: repeat(8, 6.5vmin);
-  grid-template-columns: repeat(8, 6.5vmin);
-}
-
-.hotpot-grid div {
-    border: 0.5px dashed black;
-}
-
-.grid-enemy > .taken,
-.grid-enemy > .boom {
-  background-color: hsl(200, 100%, 50%) !important;
-  border-radius: 0 !important;
-}
-
-.taken,
-.food {
-  position: relative;
-  background-color: hsl(0, 0%, 80%);
-}
-
-.taken.start.vertical,
-.taken.start.vertical::before {
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-}
-
-.taken.end.vertical,
-.taken.end.vertical::before {
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-}
-
-.taken.start.horizontal,
-.taken.start.horizontal::before {
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
-}
-
-.taken.end.horizontal,
-.taken.end.horizontal::before {
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-}
-
-.taken.vertical::before,
-.taken.horizontal::before {
-  content: '';
-  position: absolute;
-  border: .3vmin solid white;
-  top: -1px;
-  bottom: -1px;
-  left: -1px;
-  right: -1px;
-}
-
-.taken.horizontal::before {
-  border-left: none;
-  border-right: none;
-}
-
-.taken.vertical::before {
-  border-top: none;
-  border-bottom: none;
-}
-
-.grid-display {
-  display: flex;
-}
-
-.food > div {
-  width: 4.6vmin;
-  height: 4.6vmin;
-}
-
-.food {
-  width: calc(4.6vmin * var(--width, 1));
-  height: calc(4.6vmin * var(--height, 1));
-  background-color: green;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 2vmin;
-  border-radius: 2vmin;
-}
-
-.ingr0-container,
-.ingr1-container,
-.ingr2-container,
-.ingr3-container {
-  --width: 4;
-}
-
-.ingr0-container-vertical,
-.ingr1-container-vertical,
-.ingr2-container-vertical,
-.ingr3-container-vertical {
-  --height: 4;
-  --width: 1;
-}
-
-.options {
-  font-size: 1.5rem;
-  align-items: center;
-  flex-direction: column;
-}
-
-.info-text {
-  margin: 1rem;
-}
-
-.miss,
-.boom {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.boom::after,
-.miss::after {
-  content: '';
-  position: absolute;
-  border-radius: 100%;
-  width: 2vmin;
-  height: 2vmin;
-}
-
-.miss::after {
-  background-color: white;
-}
-
-.boom::after {
-  background-color: red;
-}
-
-.miss::before {
-  content: '';
-  position: absolute;
-  animation: hit .2s ease-out forwards;
-  border: 1vmin solid white;
-  border-radius: 100%;
-  width: 2vmin;
-  height: 2vmin;
-}
-
-.boom {
-  animation: boom .2s ease-out forwards;
-}
-
-.btn2:hover, .btn2:focus {
+.btn:hover, .btn:focus, .btn2:hover, .btn2:focus {
   background-color: #b98603;
 }
 
@@ -270,9 +133,12 @@ body {
 }
 
 .hotpot-grid div {
-    border: 0.5px dashed black;
+    border: 1px dashed black;
     z-index:2;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:0;
 }
 
 .grid-enemy > .taken,
@@ -357,7 +223,7 @@ body {
 .ingr1-container,
 .ingr2-container,
 .ingr3-container {
-  --width: 4;
+  --width: 4;  
   z-index: 3;
 }
 
@@ -699,7 +565,7 @@ body {
     animation: boom .2s ease-out forwards;
   }
   
-  @keyframes hit {
+@keyframes hit {
     0% {
       opacity: 1;
       transform: scale(0);
@@ -710,55 +576,91 @@ body {
       transform: scale(4);
     }
   }
-  
-  @keyframes boom {
-    0% {
-      background-color: red;
-    }
-  
-    100% {
-      background-color: hsl(0, 0%, 80%);
-    }
-  }
-  
-  .player {
-    margin: 2vmin;
-  }
-  #player-status {
-    justify-content: space-between;
-  }
-  
-  .ready {
-      font-weight: normal;
-      opacity: .25;
-      text-decoration: line-through;
-  }
-  
-  .ready.active {
-      opacity: 1;
-      text-decoration: none;
-  } 
 
-    progress {
-    border: none;
-    width: 400px;
-    height: 60px;
-    background: crimson;
+
+@keyframes boom {
+  0% {
+    background-color: red;
   }
-  
-  progress {
-    color: crimson;
-    height: 0.75rem;
+
+  100% {
+    background-color: hsl(0, 0%, 80%);
   }
-  
-  progress::-moz-progress-bar {
-    background: hsl(0, 0%, 80%);
-  }
-  
-  progress::-webkit-progress-value {
-    background: crimson;
-  }
-  
-  progress::-webkit-progress-bar {
-    background: hsl(0, 0%, 80%);
-  }
+}
+
+.player {
+  margin: 2vmin;
+}
+#player-status {
+  justify-content: space-between;
+}
+
+.ready {
+    font-weight: normal;
+    opacity: .25;
+    text-decoration: line-through;
+}
+
+.ready.active {
+    opacity: 1;
+    text-decoration: none;
+} 
+
+progress {
+  border: none;
+  width: 400px;
+  height: 60px;
+  background: crimson;
+}
+
+progress {
+  color: crimson;
+  height: 0.75rem;
+}
+
+progress::-moz-progress-bar {
+  background: hsl(0, 0%, 80%);
+}
+
+progress::-webkit-progress-value {
+  background: crimson;
+}
+
+progress::-webkit-progress-bar {
+  background: hsl(0, 0%, 80%);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 10vw;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%; 
+  background: #FF0000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #FFB800;
+  cursor: pointer;
+}
+
+.slidecontainer {
+  position: absolute;
+  right: 0px;
+}
