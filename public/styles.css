@@ -1,8 +1,8 @@
 body {
     margin: 0;
-    background-color: #F3F3F3;
+    /* background-color: #F3F3F3; */
     overflow-x: hidden;
-}
+  }
 
 .index {
   display: flex;
@@ -159,6 +159,7 @@ body {
 .food {
   position: relative;
   background-color: hsl(0, 0%, 80%);
+  --width: 4;
 }
 
 .taken.start.vertical,
@@ -220,28 +221,81 @@ body {
 .food {
   width: calc(4.6vmin * var(--width, 1));
   height: calc(4.6vmin * var(--height, 1));
-  background-color: green;
+  background-color: transparent;
   display: flex;
   flex-wrap: wrap;
   margin: 0vmin 2vmin 0vmin 2vmin;
   border-radius: 2vmin;
 }
 
-.ingr0-container,
-.ingr1-container,
-.ingr2-container,
-.ingr3-container {
-  --width: 4;  
-  z-index: 3;
+.ingr0-container{
+  background-image: url("images/aubergine.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --width: 4;
 }
 
-.ingr0-container-vertical,
-.ingr1-container-vertical,
-.ingr2-container-vertical,
-.ingr3-container-vertical {
+.ingr1-container {
+  background-image: url("images/fish.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --width: 4;
+}
+
+.ingr2-container {
+  background-image: url("images/meat.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --width: 4;
+}
+
+.ingr3-container {
+  background-image: url("images/springonion.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --width: 4;
+}
+
+.ingr0-container-vertical {
+  background-image: url("aubergine_vertical.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   --height: 4;
   --width: 1;
-  z-index: 3;
+}
+
+.ingr1-container-vertical {
+  background-image: url("fish_vertical.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --height: 4;
+  --width: 1;
+}
+
+
+.ingr2-container-vertical {
+  background-image: url("meat_vertical.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --height: 4;
+  --width: 1;
+
+
+}
+.ingr3-container-vertical {
+  background-image: url("springonion_vertical.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  --height: 4;
+  --width: 1;
 }
 
 .options {
