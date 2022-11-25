@@ -68,10 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startMultiPlayer()
 
-  socket.on('setup', () => {
-    startMultiPlayer()
-  })
-
   function startMultiPlayer() {
 
     socket.on('player-number', numAndStarter => {
@@ -145,6 +141,23 @@ document.addEventListener('DOMContentLoaded', () => {
       socket.emit('player-name', sessionStorage.getItem('player1'))
     })
   }
+
+  //////////
+
+  function reset() {
+    console.log('reset')
+    socket.emit('reset')
+  }
+  resetButton.addEventListener('click', reset())
+
+  socket.on('setup', () => {
+    createBoard([],[])
+    createBoard([],[])
+    startMultiPlayer()
+    socket.emit('reset')
+  })
+
+  /////////////
 
   function createBoard(grid, squares) {
     for (let i = 0; i < width*width; i++) {
@@ -416,10 +429,5 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.volume = e.currentTarget.value / 100;
   })
 
-  function reset() {
-    console.log('reset')
-    socket.emit('reset')
-  }
-  // resetButton.addEventListener('click', reset())
-
+  
 })
