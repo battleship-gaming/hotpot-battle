@@ -141,7 +141,6 @@ body {
   left: 5px;
   background-repeat: no-repeat;
   z-index: 5;
-  
 
 }
 
@@ -397,6 +396,13 @@ body {
   align-items: center;
   flex-direction: column;
 }
+
+.mutebotton {
+  position: relative;
+  left: 160vh;
+  bottom: -2vh;
+}
+
 
 .info-text {
   margin: 1rem;
