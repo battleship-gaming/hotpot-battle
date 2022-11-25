@@ -256,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
   function playGameMulti(socket) {
     setupButtons.style.display = 'none'
     if(isGameOver) return

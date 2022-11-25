@@ -97,6 +97,16 @@
             audio.volume = 0.2;
         </script>
     </audio>
+    <div class="mutebotton">
+    <input type="button" href="javascript:void(0);" onclick="toggleMute()" value="mute/unmute">
+    <script>
+          function toggleMute() {
+            var myaudio = document.getElementById('myaudio');
+            myaudio.muted = !myaudio.muted;
+            }
+    </script>
+    </div>
+
 
     <img src ="smokes.png" id="smoke"/>
     <script>

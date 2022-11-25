@@ -407,6 +407,13 @@ body {
   flex-direction: column;
 }
 
+.mutebotton {
+  position: relative;
+  left: 160vh;
+  bottom: -2vh;
+}
+
+
 .info-text {
   margin: 1rem;
 }
