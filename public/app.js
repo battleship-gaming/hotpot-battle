@@ -392,10 +392,10 @@ document.addEventListener('DOMContentLoaded', () => {
       playerScore(1)
     }
 
-    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 10) {
+    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 40) {
       infoDisplay.innerHTML = "YOU WIN"
     }
-    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 10) {
+    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 40) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
     }
   }
@@ -412,7 +412,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startMultiPlayer()
     setupButtons.style.display = 'inline'
   }
-////
 
 let volume = document.getElementById("volume-slider");
 volume.addEventListener("change", function(e) {
