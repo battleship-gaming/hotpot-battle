@@ -628,7 +628,7 @@ body {
   .food {
     width: calc(4.6vmin * var(--width, 1));
     height: calc(4.6vmin * var(--height, 1));
-    background-color: green;
+    background-color: transparent;
     display: flex;
     flex-wrap: wrap;
     margin: 0vmin 2vmin 0vmin 2vmin;
