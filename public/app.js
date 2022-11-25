@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('bg') == null) soupsoup.style.backgroundImage = "url(twosoupbg.png)"
   else soupsoup.style.backgroundImage = sessionStorage.getItem('bg')
 
+  let chefchef = document.querySelector('#chosen-chef')  
+  console.log('sessionstorage chef:',sessionStorage.getItem('chef'))
+  if (sessionStorage.getItem('chef') == null) chefchef.style.backgroundImage = "url(chefman.svg)"
+  else chefchef.style.backgroundImage = sessionStorage.getItem('chef')
+
   const foodArray = [
     {
       name: 'ingr0',

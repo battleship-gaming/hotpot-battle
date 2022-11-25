@@ -22,11 +22,26 @@
         sessionStorage.setItem('bg', "url(grillbg.png)");
       }
    </script>
+   <script> 
+    function choosechefman(){
+      sessionStorage.setItem('chef', "url(chefman.svg)");
+    }
+    function choosechefwoman(){
+      sessionStorage.setItem('chef', "url(chefwoman.svg)");
+    }
+ </script>
   </head>
   <body class=index>
+    <h1 class="chooseyourpottext">Choose your chef:</h1>
+    <ul class="chooseavatar">
+      <button class="btn4man" id="chefman" onclick=choosechefman()></button>
+      <button  class="btn4woman" id="chefwoman" onclick=choosechefwoman()></button>
+    </ul>
+
     <div class="urltogithub" style = "position:relative; top: 25px; right: 3vh">
       <input type="button" onclick="location.href='https://github.com/battleship-gaming/hotpot-battle';" value="Go to github" />
     </div>
+
     <h1 class="chooseyourpottext">Choose your pot:</h1>
     <ul class="choosepot">
       <button class="btn3" id="twosoup" onclick=choosetwosoup()>two soup</button>
