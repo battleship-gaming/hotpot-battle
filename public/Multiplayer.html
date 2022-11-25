@@ -41,8 +41,35 @@
                 <button id="rotate" class="btn2">Rotate</button>
                 <button id="start" class="btn2">Ready</button>
             </div>
-            <button id="reset" class="btn2">Reset</button>
+            <button id="reset-false" onclick="openForm()" class="btn2">Reset</button>
         </div>
+
+        <div class="form-popup" id="myForm">
+            <form class="form-container">              
+              <label for="psw"><b>Password</b></label>
+              <input type="password" id="password" placeholder="Enter Password" name="psw" required>
+              <script>
+                if(document.getElementById("password") === "netcentric") {
+                    document.getElementById("demo").id = "reset";
+                } else {
+                    return
+                }
+              </script>
+              <button type="submit" class="btn">Confirm Reset</button>
+              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+
+        <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+            
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+            
 
         <div class="container">
             <div class="grid-display">
