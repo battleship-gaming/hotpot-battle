@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const userGrid = document.querySelector('.grid-user')
   const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
-  const food = document.querySelectorAll('.food')
   const ingr0 = document.querySelector('.ingr0-container')
   const ingr1 = document.querySelector('.ingr1-container')
   const ingr2 = document.querySelector('.ingr2-container')
@@ -12,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetButton = document.querySelector('#reset')
   const infoDisplay = document.querySelector('#info')
   const setupButtons = document.getElementById('setup-buttons')
+  const food = document.querySelectorAll('.food')
+  const socket = io();
   const userSquares = []
   const enemySquares = []
   let isHorizontal = true
@@ -27,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let p2Score = 0
 
   let player1Name = document.querySelector('#player1-name')  
-  console.log('sesionstorage player1:',sessionStorage.getItem('player1'))
+  console.log('sessionstorage player1:',sessionStorage.getItem('player1'))
   if (sessionStorage.getItem('player1') == null) player1Name.innerHTML = 'You'
-  else player1Name.innerHTML = sessionStorage.getItem('player1')  
+  else player1Name.innerHTML = sessionStorage.getItem('player1')
 
   const foodArray = [
     {
@@ -68,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   startMultiPlayer()
 
   function startMultiPlayer() {
-    const socket = io();
 
     socket.on('player-number', numAndStarter => {
       let num = numAndStarter[0]
@@ -83,11 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('currentPlayer:', currentPlayer)
         socket.emit('check-players')
       }
-    })    
-    
-    socket.on('player-connection', num => {
-      console.log(`Player number ${num} has connected or disconnected`)
-      playerConnectedOrDisconnected(num)
     })
 
     socket.on('enemy-ready', num => {
@@ -101,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('check-players', players => {
       players.forEach((p, i) => {
-        if(p.connected) playerConnectedOrDisconnected(i)
         if(p.ready) {
           playerReady(i)
           if(i !== playerReady) enemyReady = true
@@ -112,11 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', () => {
       if(allFoodPlaced) playGameMulti(socket)
       else infoDisplay.innerHTML = "Please place all ships"
-    })
-
-    resetButton.addEventListener('click', () => {
-      p1Score = 0
-      p2Score = 0
     })
 
     enemySquares.forEach(square => {
@@ -142,21 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.emit('player-name', sessionStorage.getItem('player1'))
     socket.on('enemyName', enemyName => {
-      let player2Name = document.querySelector('#player2-name')  
+      let player2Name = document.querySelector('#player2-name')
       if (enemyName == null) {
         player2Name.innerHTML = 'Your Hotpot Enemy'
       } else {           
         sessionStorage.setItem('player2', enemyName)
         player2Name.innerHTML = enemyName     
       }      
-      socket.emit('player-name', sessionStorage.getItem('player1'))   
+      socket.emit('player-name', sessionStorage.getItem('player1'))
     })
-    
-
-    function playerConnectedOrDisconnected(num) {
-      let player = `.p${parseInt(num) + 1}`
-      document.querySelector(`${player} .connected`).classList.toggle('active')
-    }
   }
 
   function createBoard(grid, squares) {
@@ -364,50 +347,50 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkForWins() {
     let enemy = 'enemy'
     if (ingr0Count === 4) {
-      infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr0`
+      infoDisplay.innerHTML = `You found ${enemy}'s aubergine!`
       ingr0Count = 10
       playerScore(0)
     }
     if (ingr1Count === 4) {
-      infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr1`
+      infoDisplay.innerHTML = `You found ${enemy}'s fish!`
       ingr1Count = 10
       playerScore(0)
     }
     if (ingr2Count === 4) {
-      infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr2`
+      infoDisplay.innerHTML = `You found ${enemy}'s meat!`
       ingr2Count = 10
       playerScore(0)
     }
     if (ingr3Count === 4) {
-      infoDisplay.innerHTML = `You sunk the ${enemy}'s ingr3`
+      infoDisplay.innerHTML = `You found ${enemy}'s spring onion!`
       ingr3Count = 10
       playerScore(0)
     }
     if (oppIngr0Count === 4) {
-      infoDisplay.innerHTML = `${enemy} sunk your ingr0`
+      infoDisplay.innerHTML = `${enemy} found your aubergine!`
       oppIngr0Count = 10
       playerScore(1)
     }
     if (oppIngr1Count === 4) {
-      infoDisplay.innerHTML = `${enemy} sunk your ingr1`
+      infoDisplay.innerHTML = `${enemy} found your fish!`
       oppIngr1Count = 10
       playerScore(1)
     }
     if (oppIngr2Count === 4) {
-      infoDisplay.innerHTML = `${enemy} sunk your ingr2`
+      infoDisplay.innerHTML = `${enemy} found your meat!`
       oppIngr2Count = 10
       playerScore(1)
     }
     if (oppIngr3Count === 4) {
-      infoDisplay.innerHTML = `${enemy} sunk your ingr3`
+      infoDisplay.innerHTML = `${enemy} found your spring onion!`
       oppIngr3Count = 10
       playerScore(1)
     }
 
-    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 10) {
+    if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 40) {
       infoDisplay.innerHTML = "YOU WIN"
     }
-    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 10) {
+    if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 40) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
     }
   }
@@ -424,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startMultiPlayer()
     setupButtons.style.display = 'inline'
   }
-////
 
 let volume = document.getElementById("volume-slider");
 volume.addEventListener("change", function(e) {
