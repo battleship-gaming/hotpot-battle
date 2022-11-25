@@ -11,10 +11,6 @@ let randomStarter
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")))
 
-app.listen(3000, '0.0.0.0', function() {
-  console.log('Listening to port:  ' + 3000);
-});
-
 // Start server
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
