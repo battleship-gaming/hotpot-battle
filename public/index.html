@@ -22,8 +22,21 @@
         sessionStorage.setItem('bg', "url(grillbg.png)");
       }
    </script>
+   <script> 
+    function choosechefman(){
+      sessionStorage.setItem('chef', "url(chefman.svg)");
+    }
+    function choosechefwoman(){
+      sessionStorage.setItem('chef', "url(chefwoman.svg)");
+    }
+ </script>
   </head>
   <body class=index>
+    <h1 class="chooseyourpottext">Choose your chef:</h1>
+    <ul class="chooseavatar">
+      <button class="btn4man" id="chefman" onclick=choosechefman()></button>
+      <button  class="btn4woman" id="chefwoman" onclick=choosechefwoman()></button>
+    </ul>
     <h1 class="chooseyourpottext">Choose your pot:</h1>
     <ul class="choosepot">
       <button class="btn3" id="twosoup" onclick=choosetwosoup()>two soup</button>
@@ -65,8 +78,6 @@
       multiplayerBtn.addEventListener('click', submitName)
     </script>   
   </body>
-    <div class = "bubble" style="position:absolute; bottom: 23vh;; left: 50px">Let's play!</div>
-    <div class = "chef" id="bottom" style="position:absolute; margin-bottom:-21.9vh; left: 0"></div>
   </body>
   <audio controls autoplay loop hidden id="myaudio">
     <source src="music.mp3" type="audio/mpeg">
