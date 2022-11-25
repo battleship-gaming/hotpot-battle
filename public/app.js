@@ -290,6 +290,15 @@ document.addEventListener('DOMContentLoaded', () => {
       timeleft -= 1;
     }, 1000);
   }
+  resetButton.addEventListener('click', reset)
+  function reset() {
+    console.log('reset called');
+    socket.emit("reset game please");
+  }
+  socket.on("client reset game",()=>{
+    console.log('client reset game');
+    location.reload();
+  })
 
   function playerReady(num) {
     let player = `.p${parseInt(num) + 1}`
@@ -417,6 +426,7 @@ let volume = document.getElementById("volume-slider");
 volume.addEventListener("change", function(e) {
     audio.volume = e.currentTarget.value / 100;
 })
+
 
 
 })

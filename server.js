@@ -47,6 +47,10 @@ io.on('connection', socket => {
   // Tell eveyone what player number just connected
   socket.broadcast.emit('player-connection', playerIndex)
 
+  socket.on('reset game please',()=>{
+    io.emit("client reset game");
+  })
+
   // Handle Diconnect
   socket.on('disconnect', () => {
     console.log(`Player ${playerIndex} disconnected`)
