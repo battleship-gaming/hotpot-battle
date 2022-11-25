@@ -16,15 +16,11 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 // Handle a socket connection request from web client
 const connections = [null, null]
-let clientNo = 0
-const users = []
+let users = 0
 
 io.on('connection', socket => {
-  clientNo++;
-  socket.join(Math.round(clientNo/2));
-  users.push(clientNo)
   // Find an available player number
-  let playerIndex = -1;
+  let playerIndex = -1
   for (const i in connections) {
     if (connections[i] === null) {
       playerIndex = i
@@ -32,9 +28,14 @@ io.on('connection', socket => {
     }
   }
 
+  if(connections[0] != null) users = 1
+  if(connections[1] != null) users = 2
+  
+  socket.broadcast.emit('client-number', users)
+
   // Tell the connecting client what player number they are
-  if (playerIndex == 0) randomStarter = Math.random()>=0.5? 1:0
-  socket.emit('player-number', [playerIndex,randomStarter])
+  socket.broadcast.emit('player-number', playerIndex)
+  console.log(`player number ${playerIndex}`)
   
   console.log(`Player ${playerIndex} has connected`)
 
@@ -50,7 +51,8 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     console.log(`Player ${playerIndex} disconnected`)
     connections[playerIndex] = null
-    //Tell everyone what player numbe just disconnected
+    users--
+    //Tell everyone what player number just disconnected
     socket.broadcast.emit('player-connection', playerIndex)
   })
 
