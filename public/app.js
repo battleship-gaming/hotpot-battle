@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startMultiPlayer()
 
+  socket.on('setup', () => {
+    startMultiPlayer()
+  })
+
   function startMultiPlayer() {
 
     socket.on('player-number', numAndStarter => {
@@ -79,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playerNum = parseInt(num)
         console.log('playerNum:', playerNum)
         console.log('randomStarter:', randomStarter)
-        if(randomStarter != playerNum) currentPlayer = "enemy"
+        if(randomStarter !== playerNum) currentPlayer = "enemy"
         console.log('currentPlayer:', currentPlayer)
         socket.emit('check-players')
       }
@@ -396,23 +400,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function gameOver() {
-    userSquares = []
-    enemySquares = []
-    isHorizontal = true
+    isGameOver = true
+    // isHorizontal = true
     ready = false
     enemyReady = false
     allFoodPlaced = false
-    createBoard(userGrid, userSquares)
-    createBoard(enemyGrid, enemySquares)
+    createBoard([],[])
+    createBoard([],[])
     startMultiPlayer()
     setupButtons.style.display = 'inline'
   }
-////
 
-let volume = document.getElementById("volume-slider");
-volume.addEventListener("change", function(e) {
-    audio.volume = e.currentTarget.value / 100;
-})
+  let volume = document.getElementById("volume-slider");
+  volume.addEventListener("change", function(e) {
+      audio.volume = e.currentTarget.value / 100;
+  })
 
+  function reset() {
+    console.log('reset')
+    socket.emit('reset')
+  }
+  // resetButton.addEventListener('click', reset())
 
 })

@@ -50,6 +50,11 @@ io.on('connection', socket => {
 
   connections[playerIndex] = false
 
+  socket.on('reset', () => {
+    console.log('socket.on.reset')
+    socket.broadcast.emit('setup')
+  })
+
   // Tell eveyone what player number just connected
   socket.broadcast.emit('player-connection', playerIndex)
 

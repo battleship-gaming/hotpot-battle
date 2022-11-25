@@ -133,7 +133,7 @@ body {
   margin: 2vmin;
   display: grid;
   background-color: #614833;
-  opacity: 0.15;
+  opacity: 0.35;
   grid-template-rows: repeat(8, 6.5vmin);
   grid-template-columns: repeat(8, 6.5vmin);
   z-index:2;
