@@ -7,7 +7,7 @@ body {
 .index {
   display: flex;
   justify-content: center;
-  background-image:url('firstpagebg.jpg');
+  background-image:url('firstpagebg.png');
   background-position: center;
   height: 100vh;
   position: relative;
@@ -17,13 +17,22 @@ body {
 }
 
 .multiplayer {
-  background-image:url('hotpotbg.png');
+  /*background-image:url('twosoupbg.png');*/
   background-position: center;
   height: 100vh;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index:0;
+  z-index:1;
+}
+
+#chosen-bg {
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index:1;
 }
 
 *, *::before, *::after {
@@ -383,17 +392,299 @@ body {
   animation: boom .2s ease-out forwards;
 }
 
-@keyframes hit {
-  0% {
-    opacity: 1;
-    transform: scale(0);
+  *, *::before, *::after {
+    font-family: 'Fredoka One', cursive;
+    box-sizing: border-box;
   }
 
-  100% {
-    opacity: 0;
-    transform: scale(4);
+  .chooseyourpottext{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
+    margin-bottom: 25vh;
+    font-size: 3.2vh;
+    color: #409A53;
+    text-shadow: 0.2vh 0.2vh #ffffff;
   }
-}
+
+  .choosepot{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-self: flex-end;
+    margin-bottom: 10vh;
+    margin-right: 3%;
+  }
+  
+  #enter-name-container {
+    color: #409A53;
+    text-shadow: 0.2vh 0.2vh #ffffff;
+    position: relative;
+    top: 60vh;
+    font-size: 3.2vh;    
+  }
+    
+  #p1-name-input {
+    width: 25vw;
+    height: 5vh;
+    font-size: 4vh;
+    border: none;    
+    border-radius: 1vmin;
+    color: #409A53; 
+    box-shadow: 0.2vmin 0.2vmin;
+  }
+
+  #save-name {
+    margin: 1vmin;
+    padding: 0.2vmin;
+    width: 5vw;
+    height: 5vh;
+  }
+
+  .btn1 {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    align-self: flex-end;
+    margin-bottom: 17vh;
+    font-size: 30px;
+    background-color: #409A53;
+    padding: 0.5em;
+    color: #FFFFFF;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    height: 4rem;
+    z-index:2;
+    text-decoration: none;
+  }
+
+  .btn2 {
+    font-size: inherit;
+    background-color: #FFB800;
+    cursor: pointer;
+    padding: 0.5em;
+    margin: 4vmin 4vmin -1vmin 4vmin;
+    /* margin-top: 4vmin;
+    margin-left: 2vmin;
+    margin-right: 4vmin; */
+    color: #FF0000;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    z-index:2;
+    text-decoration: none;
+
+  }
+
+  .btn3 {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    font-size: 20px;
+    background-color: #409A53;
+    padding: 0.5em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    color: #FFFFFF;
+    border-radius: 4vmin;
+    border: 2px solid; 
+    cursor: pointer;
+    height: 4rem;
+    z-index:2;
+    -webkit-flex-direction: row; 
+    flex-direction: row;
+  }
+  
+  .btn:hover, .btn:focus {
+    background-color: #b98603;
+  }
+
+  .btn2:hover, .btn2:focus {
+    background-color: #b98603;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index:2;
+    position: relative;
+  }
+  
+  .hotpot-grid {
+    margin: 2vmin;
+    display: grid;
+    background-color: #614833;
+    opacity: 0.35;
+    grid-template-rows: repeat(8, 6.5vmin);
+    grid-template-columns: repeat(8, 6.5vmin);
+    z-index:2;
+    position: relative;
+  }
+  
+  .hotpot-grid div {
+      border: 1px dashed black;
+      z-index:2;
+      position: relative;
+  }
+  
+  .grid-enemy > .taken,
+  .grid-enemy > .boom {
+    background-color: hsl(200, 100%, 50%) !important;
+    border-radius: 0 !important;
+  }
+  
+  .taken,
+  .food {
+    position: relative;
+    background-color: hsl(0, 0%, 80%);
+  }
+  
+  .taken.start.vertical,
+  .taken.start.vertical::before {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+  }
+  
+  .taken.end.vertical,
+  .taken.end.vertical::before {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .taken.start.horizontal,
+  .taken.start.horizontal::before {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  
+  .taken.end.horizontal,
+  .taken.end.horizontal::before {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .taken.vertical::before,
+  .taken.horizontal::before {
+    content: '';
+    position: absolute;
+    border: .3vmin solid white;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+  }
+  
+  .taken.horizontal::before {
+    border-left: none;
+    border-right: none;
+  }
+  
+  .taken.vertical::before {
+    border-top: none;
+    border-bottom: none;
+  }
+  
+  .grid-display {
+    display: flex;
+    z-index:2;
+    position: relative;
+  }
+  
+  .food > div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+  }
+  
+  .food {
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0vmin 2vmin 0vmin 2vmin;
+    border-radius: 2vmin;
+  }
+  
+  .ingr0-container,
+  .ingr1-container,
+  .ingr2-container,
+  .ingr3-container {
+    --width: 4;
+    z-index:3;
+  }
+  
+  .ingr0-container-vertical,
+  .ingr1-container-vertical,
+  .ingr2-container-vertical,
+  .ingr3-container-vertical {
+    --height: 4;
+    --width: 1;
+    z-index:3;
+  }
+  
+  .options {
+    font-size: 1.5rem;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .info-text {
+    margin: 1rem;
+  }
+  
+  .miss,
+  .boom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .boom::after,
+  .miss::after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    width: 2vmin;
+    height: 2vmin;
+  }
+  
+  .miss::after {
+    background-color: white;
+  }
+  
+  .boom::after {
+    background-color: red;
+  }
+  
+  .miss::before {
+    content: '';
+    position: absolute;
+    animation: hit .2s ease-out forwards;
+    border: 1vmin solid white;
+    border-radius: 100%;
+    width: 2vmin;
+    height: 2vmin;
+  }
+  
+  .boom {
+    animation: boom .2s ease-out forwards;
+  }
+  
+@keyframes hit {
+    0% {
+      opacity: 1;
+      transform: scale(0);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: scale(4);
+    }
+  }
+
 
 @keyframes boom {
   0% {
