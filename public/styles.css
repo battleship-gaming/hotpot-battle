@@ -877,7 +877,7 @@ progress::-webkit-progress-bar {
   transition: all 5s ease-in-out;
   color: #FF0000;
   right: 0px;
-  top: 50vh;
+  top: 80vh;
 }
 
 .popup h2 {
@@ -928,4 +928,18 @@ progress::-webkit-progress-bar {
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
+}
+
+#hearts {
+  position: absolute; 
+  left: 0.5vw; 
+  top:30vh; 
+  z-index: 50;
+}
+#get-hearts {
+  position: absolute; 
+  right: 0.5vw; 
+  top: 30vh; 
+  height: 20vh; 
+  visibility: hidden;
 }

@@ -95,6 +95,10 @@ io.on('connection', socket => {
     socket.broadcast.emit('enemyName', playerName)
   })
 
+  socket.on('send-hearts', () => {
+    io.emit('get-hearts')
+  })
+
   // Timeout connection
   setTimeout(() => {
     connections[playerIndex] = null
