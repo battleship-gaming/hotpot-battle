@@ -57,6 +57,9 @@
     <input type="button" onclick="tend()" value="smoke on" class="smbutton">
     <input type="button" onclick="tn()" value="smoke off" class="smbutton">
 
+    <input type="button" onclick="dmon()" value="nightsky" class="darkmodebutton">
+    <input type="button" onclick="dmoff()" value="daylight" class="darkmodebutton">
+
     <div class="slidecontainer">
         Low Temp.
         <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
@@ -99,6 +102,16 @@
         }
         function tn() {
             document.getElementById('smoke').style.visibility='hidden';
+        }
+    </script>
+
+    <img src ="nightsky.png" id="darkmode"/>
+    <script>
+        function dmon() {
+            document.getElementById('darkmode').style.visibility='visible';
+        }
+        function dmoff() {
+            document.getElementById('darkmode').style.visibility='hidden';
         }
     </script>
 
