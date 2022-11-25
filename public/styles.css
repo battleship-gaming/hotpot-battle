@@ -163,6 +163,7 @@ body {
   position:absolute; 
   bottom: 30vh; 
   left: 50px;
+  z-index: 5;
 }
 
 .bubble::after {
@@ -197,6 +198,30 @@ body {
   visibility:hidden;
 }
 
+.darkmodebutton {
+  position: relative; 
+  top:-3rem; 
+  float: right;
+  background-color: #473838;
+  color:white;
+  z-index: 50;
+}
+
+#darkmode {
+  width:100%;
+  height:100%;
+  position: absolute; 
+  top:0vh;
+  visibility:hidden;
+  z-index: 1;
+
+}
+
+.chef {
+  position:absolute; 
+  margin-bottom:0; 
+  left: 0
+}
 
 
 .container {
@@ -661,7 +686,7 @@ body {
   .food {
     width: calc(4.6vmin * var(--width, 1));
     height: calc(4.6vmin * var(--height, 1));
-    background-color:transparent;
+    background-color: transparent;
     display: flex;
     flex-wrap: wrap;
     margin: 0vmin 2vmin 0vmin 2vmin;
@@ -758,9 +783,11 @@ body {
 
 .player {
   margin: 2vmin;
+  z-index: 5;
 }
 #player-status {
   justify-content: space-between;
+  z-index: 5;
 }
 
 .ready {
@@ -808,6 +835,7 @@ progress::-webkit-progress-bar {
   opacity: 1;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  z-index: 5;
 }
 
 .slider::-webkit-slider-thumb {
@@ -831,6 +859,7 @@ progress::-webkit-progress-bar {
 .slidecontainer {
   position: absolute;
   right: 0px;
+  z-index: 5;
 }
 
 .box {
@@ -885,7 +914,7 @@ progress::-webkit-progress-bar {
   transition: all 5s ease-in-out;
   color: #FF0000;
   right: 0px;
-  top: 50vh;
+  top: 80vh;
 }
 
 .popup h2 {
@@ -936,4 +965,18 @@ progress::-webkit-progress-bar {
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
+}
+
+#hearts {
+  position: absolute; 
+  left: 0.5vw; 
+  top:30vh; 
+  z-index: 50;
+}
+#get-hearts {
+  position: absolute; 
+  right: 0.5vw; 
+  top: 30vh; 
+  height: 20vh; 
+  visibility: hidden;
 }

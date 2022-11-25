@@ -36,15 +36,16 @@
         </div>
 
         <div class="container options">
-            <!--h3 id="info" class="info-text"></h3-->
             <progress value="0" max="10" id="progressBar"></progress>
             <div class="setup-buttons" id="setup-buttons">
                 <button id="rotate" class="btn2">Rotate</button>
                 <button id="start" class="btn2">Ready</button>
-                <button id="reset" class="btn2">Reset</button>
             </div>
-            <!--h3 id="info" class="info-text"></h3-->
+            <button id="reset" class="btn2">Reset</button>
         </div>
+        <!-- <img id="hearts" src='heart.png'> -->
+        <button id="hearts">Hearts</button>
+        <img id="get-hearts" src="moving-hearts.gif">
 
         <div class="container">
             <div class="grid-display">
@@ -58,6 +59,9 @@
 
     <input type="button" onclick="tend()" value="smoke on" class="smbutton">
     <input type="button" onclick="tn()" value="smoke off" class="smbutton">
+
+    <input type="button" onclick="dmon()" value="nightsky" class="darkmodebutton">
+    <input type="button" onclick="dmoff()" value="daylight" class="darkmodebutton">
 
     <div class="slidecontainer">
         Low Temp.
@@ -101,6 +105,16 @@
         }
         function tn() {
             document.getElementById('smoke').style.visibility='hidden';
+        }
+    </script>
+
+    <img src ="nightsky.png" id="darkmode"/>
+    <script>
+        function dmon() {
+            document.getElementById('darkmode').style.visibility='visible';
+        }
+        function dmoff() {
+            document.getElementById('darkmode').style.visibility='hidden';
         }
     </script>
 

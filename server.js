@@ -47,6 +47,10 @@ io.on('connection', socket => {
   // Tell eveyone what player number just connected
   socket.broadcast.emit('player-connection', playerIndex)
 
+  socket.on('reset game please',()=>{
+    io.emit("client reset game");
+  })
+
   // Handle Diconnect
   socket.on('disconnect', () => {
     console.log(`Player ${playerIndex} disconnected`)
@@ -89,6 +93,10 @@ io.on('connection', socket => {
 
   socket.on('player-name', playerName => {
     socket.broadcast.emit('enemyName', playerName)
+  })
+
+  socket.on('send-hearts', () => {
+    io.emit('get-hearts')
   })
 
   // Timeout connection
