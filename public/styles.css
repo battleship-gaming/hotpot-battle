@@ -85,14 +85,14 @@ body {
 }
 
 .btn2 {
-  font-size: inherit;
+  font-size: 3vh;
   background-color: #FFB800;
   cursor: pointer;
-  padding: 0.5em;
-  margin: 4vmin 4vmin -1vmin 4vmin;
+  padding: 1vmin 1vmin 1vmin 1vmin;
+  margin: 2vmin 2vmin 1vmin 2vmin;
   color: #FF0000;
   border-radius: 4vmin;
-  border: 2px solid; 
+  border: 0.2vmin solid; 
   cursor: pointer;
   z-index:2;
   text-decoration: none;
@@ -128,6 +128,70 @@ body {
 
 .btn:hover, .btn:focus, .btn2:hover, .btn2:focus {
   background-color: #b98603;
+}
+
+.chef {
+  width: 300px;
+  height: 300px;
+  position:relative;
+  background-image: url("chef1.svg");
+  background-size:60%;
+  background-position:left;
+  bottom: -4.5rem;
+  left: 5px;
+  background-repeat: no-repeat;
+  
+
+}
+
+.bubble {
+  background-color: #FFB800;
+  color: black;
+  padding: 0.5em 1em;
+  position: relative;
+  border-radius: 0 0.25em 0.25em 0.25em;
+  box-shadow: 7px 30px 40px #664400;
+  position:absolute; 
+  bottom: 30vh; 
+  left: 50px;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  border: 0.5em solid transparent;
+  border-bottom-color: #FFB800;
+  border-right-color: #FFB800;
+  right: 100%;
+  top: 100%;
+  left: 20%;
+  transform: skewY(45deg);
+  transform-origin: 100% 100%;
+
+}
+
+.smbutton {
+  position: relative; 
+  top:-3rem; 
+  float: right;
+  background-color: #555555;
+  color:white;
+  z-index: 50;
+}
+
+#smoke {
+  width: 80vw;
+  height: 80vh;
+  position: absolute; 
+  top: 10vh;
+  left: 15vw;
+  visibility:hidden;
+}
+
+.chef {
+  position:absolute; 
+  margin-bottom:0; 
+  left: 0
 }
 
 .container {
@@ -742,6 +806,9 @@ progress::-webkit-progress-bar {
   padding: 0px;
   text-align: center;
   z-index:2;
+  position:relative; 
+  left:600px; 
+  top:-100px
 }
 
 .button {
@@ -784,6 +851,8 @@ progress::-webkit-progress-bar {
   position: absolute;
   transition: all 5s ease-in-out;
   color: #FF0000;
+  right: 0px;
+  top: 50vh;
 }
 
 .popup h2 {
@@ -834,9 +903,4 @@ progress::-webkit-progress-bar {
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
-}
-
-.smbutton {
-  background-color: #555555;
-  color:white;
 }

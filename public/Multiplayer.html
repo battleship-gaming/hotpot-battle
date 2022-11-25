@@ -21,7 +21,7 @@
                 <div class="score">0</div>
             </div>
             
-        <div class="glow" style = "position:relative;  top:25px">HOTPOT BATTLE</div>
+            <div class="glow" style = "position:relative;  top:25px">HOTPOT BATTLE</div>
 
             <div class="player p2">
                 <div id="player2-name"></div>
@@ -29,20 +29,21 @@
                 <div class="score">0</div>
             </div>
         </div>
+
         <div class="container">
             <div class="hotpot-grid grid-user"></div>
             <div class="hotpot-grid grid-enemy"></div>
         </div>
 
         <div class="container options">
-            <h3 id="info" class="info-text"></h3>
+            <!--h3 id="info" class="info-text"></h3-->
             <progress value="0" max="10" id="progressBar"></progress>
             <div class="setup-buttons" id="setup-buttons">
                 <button id="rotate" class="btn2">Rotate</button>
                 <button id="start" class="btn2">Ready</button>
                 <button id="reset" class="btn2">Reset</button>
             </div>
-            <h3 id="info" class="info-text"></h3>
+            <!--h3 id="info" class="info-text"></h3-->
         </div>
 
         <div class="container">
@@ -52,35 +53,38 @@
                 <div class="food ingr2-container" draggable="true"><div id="ingr2-0"></div><div id="ingr2-1"></div><div id="ingr2-2"></div><div id="ingr2-3"></div></div>
                 <div class="food ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
             </div>
-        
-        <input type="button" onclick="tend()" value="smoke on" class="smbutton" style="position: relative; top:-20px; left:250px">
-        <input type="button" onclick="tn()" value="smoke off" class="smbutton" style="position: relative; top:-20px; left:260px">
-
-        
-        </body>
-
         </div>
-        <div class="slidecontainer">
-            Low Temp.
-            <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
-            High Temp.
-        </div>
+    </body>
 
-        <div class="box" style = "position:relative; left:600px; top:-100px">
-            <a class="button" href="#popup1" style="color :#FF0000;">Help</a>
-        </div>
+    <input type="button" onclick="tend()" value="smoke on" class="smbutton">
+    <input type="button" onclick="tn()" value="smoke off" class="smbutton">
 
-        <div id="popup1" class="overlay" style = "position:relative;  top:-686px">
-            <div class="popup">
-                <h2>How to play?</h2>
-                <a class="close" href="#"> &times;</a>
-                <div class="content">
-                    <p style="color :#FF0000;">1. Place your ingredients</p>
-                    <p>2. Guess where the opponent's ingredients are</p>
-                    <p>3. Win!</p>
-                </div>
+    <div class="slidecontainer">
+        Low Temp.
+        <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
+        High Temp.
+    </div>
+
+    <div class="bubble" >
+        <h3 id="info" class="info-text"></h3>
+    </div>
+
+    <div class="chef"></div>
+    <div class="box">
+        <a class="btn2" href="#popup1" style="color :#FF0000;">Help</a>
+    </div>
+
+    <div id="popup1" class="overlay" style = "position:relative;  top:-686px">
+        <div class="popup">
+            <h2>How to play?</h2>
+            <a class="close" href="#"> &times;</a>
+            <div class="content">
+                <p style="color :#FF0000;">1. Place your ingredients</p>
+                <p>2. Guess where the opponent's ingredients are</p>
+                <p>3. Win!</p>
             </div>
         </div>
+    </div>
 
     <audio controls autoplay loop hidden id="myaudio">
         <source src="music2.mp3" type="audio/mpeg">
@@ -90,16 +94,14 @@
         </script>
     </audio>
 
-        <body>
-          <img src ="smokes.png" id="my" width="310" height="392" style="position: absolute; top:-25px; left:160px; width: 1200px; height: 800px; visibility:hidden"/>
-          <script type="text/javascript">
-            function tend() {
-              document.getElementById('my').style.visibility='visible';
-            }
-            function tn() {
-              document.getElementById('my').style.visibility='hidden';
-            }
-          </script>
-          </body>
+    <img src ="smokes.png" id="smoke"/>
+    <script>
+        function tend() {
+            document.getElementById('smoke').style.visibility='visible';
+        }
+        function tn() {
+            document.getElementById('smoke').style.visibility='hidden';
+        }
+    </script>
 
 </html>
