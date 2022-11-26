@@ -122,6 +122,7 @@ body {
   float: right;
   background-color: #555555;
   color: white;
+  z-index: 10;
 }
 
 #smoke {
@@ -341,6 +342,7 @@ body {
   float: right;
   background-color: #555555;
   color: white;
+  z-index: 10;
 }
 
 .info-text {
