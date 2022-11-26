@@ -3,60 +3,83 @@
   <head>
     <meta charset="utf-8">
     <title>Hotpot Battle</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="app.js" charset="utf-8"></script>
+
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
     <!-- Fredoka One Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <script src="app.js" charset="utf-8"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script> 
+    
+    <script>
       function choosetwosoup(){
-        sessionStorage.setItem('bg', "url(twosoupbg.png)");
+        sessionStorage.setItem('bg', "url(images/twosoupbg.png)");
+        document.querySelector('.twosoup').style.borderColor = '#409A53';
+        document.querySelector('.onesoup').style.borderColor = 'white';
+        document.querySelector('.grill').style.borderColor = 'white';
       }
       function chooseonesoup(){
-        sessionStorage.setItem('bg', "url(onesoupbg.png)");
+        sessionStorage.setItem('bg', "url(images/onesoupbg.png)");
+        document.querySelector('.twosoup').style.borderColor = 'white';
+        document.querySelector('.onesoup').style.borderColor = '#409A53';
+        document.querySelector('.grill').style.borderColor = 'white';
       }
       function choosegrill(){
-        sessionStorage.setItem('bg', "url(grillbg.png)");
+        sessionStorage.setItem('bg', "url(images/grillbg.png)");
+        document.querySelector('.twosoup').style.borderColor = 'white';
+        document.querySelector('.onesoup').style.borderColor = 'white';
+        document.querySelector('.grill').style.borderColor = '#409A53';
       }
-   </script>
-   <script> 
-    function choosechefman(){
-      sessionStorage.setItem('chef', "url(chefman.svg)");
-    }
-    function choosechefwoman(){
-      sessionStorage.setItem('chef', "url(chefwoman.svg)");
-    }
- </script>
+      function choosechefman(){
+        sessionStorage.setItem('chef', "url(images/chefman.svg)");
+        document.querySelector('.btn4man').style.borderColor = '#409A53';
+        document.querySelector('.btn4woman').style.borderColor = 'white';
+      }
+      function choosechefwoman(){
+        sessionStorage.setItem('chef', "url(images/chefwoman.svg)");
+        document.querySelector('.btn4man').style.borderColor = 'white';
+        document.querySelector('.btn4woman').style.borderColor = '#409A53';
+      }
+    </script>
   </head>
+  
   <body class=index>
-    <h1 class="chooseyourpottext">Choose your chef:</h1>
-    <ul class="chooseavatar">
-      <button class="btn4man" id="chefman" onclick=choosechefman()></button>
-      <button  class="btn4woman" id="chefwoman" onclick=choosechefwoman()></button>
-    </ul>
-
-    <div class="urltogithub" style = "position:relative; top: 25px; right: 3vh">
-      <input type="button" onclick="location.href='https://github.com/battleship-gaming/hotpot-battle';" value="Go to github" />
+    <div class="urltogithub" style="position: fixed; bottom: 1vh; right: 1vh">
+      <input type="button" onclick="window.open('https://github.com/battleship-gaming/hotpot-battle');" value="Github" />
     </div>
 
-    <h1 class="chooseyourpottext">Choose your pot:</h1>
-    <ul class="choosepot">
-      <button class="btn3" id="twosoup" onclick=choosetwosoup()>two soup</button>
-      <button  class="btn3" id="onesoup" onclick=chooseonesoup()>one soup</button>
-      <a  class="btn3" id="grill" onclick=choosegrill()>grill</a>
-    </ul>
-    <div id="enter-name-container">
-      <div id="client-number">cock</div>
-      <h2>Enter your name:</h2>
-      <input id="p1-name-input">
-      <button id="save-name" class="btn2">OK</button>
-      <h2 id="greeting"></h2> 
-    </div> 
-    <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Multiplayer</a>
-    
+    <div style="display: flex; align-items: flex-start; gap: 4rem;">
+      <div id="enter-container">
+        <h1 class="chooseyourtext">Choose your chef:</h1>
+        <ul class="chooseavatar" style="margin-left: auto; margin-right: auto; padding: 0; list-style-type: none;">
+          <button class="btn4man" id="chefman" onclick=choosechefman()></button>
+          <button class="btn4woman" id="chefwoman" onclick=choosechefwoman()></button>
+        </ul>
+      </div>
+  
+      <div id="enter-container">
+        <h1 class="chooseyourtext">Choose your pot:</h1>
+        <ul class="choosepot">
+          <button class="btn3 twosoup" id="twosoup" onclick=choosetwosoup()></button>
+          <button class="btn3 onesoup" id="onesoup" onclick=chooseonesoup()></button>
+          <button class="btn3 grill" id="grill" onclick=choosegrill()></button>
+        </ul>
+      </div>
+  
+      <div id="enter-container">
+        <div id="client-number">Customers:</div>
+        <h2>Enter your name:</h2>
+        <div style="flex-direction: row;  width: auto;">
+          <input id="p1-name-input">
+          <button id="save-name" class="btn2">OK</button>
+          <a href="/Multiplayer.html" id="multiplayer-btn" class="btn1">Play</a>
+        </div>
+        <h2 id="greeting"></h2>
+      </div>
+    </div>
+
     <script>
       const socket = io();
       socket.on('client-number', num => {
@@ -75,19 +98,17 @@
       }
 
       saveName.addEventListener('click', greetPlayer)
-      
+
       function submitName() {
         console.log('playerIndex:', playerIndex)
       }
-      
+
       multiplayerBtn.addEventListener('click', submitName)
-    </script>   
+    </script>
   </body>
-    <div class = "bubble" >Let's play!</div>
-    <div class = "chef" ></div>
-  </body>
+  
   <audio controls autoplay loop hidden id="myaudio">
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="audio/music.mp3" type="audio/mpeg">
     <script>
         var audio = document.getElementById("myaudio");
         audio.volume = 0.2;

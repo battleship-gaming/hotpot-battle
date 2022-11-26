@@ -1,131 +1,147 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Hotpot Battle</title>
-        <script src="app.js" charset="utf-8"></script>
+  <head>
+    <meta charset="utf-8">
+    <title>Hotpot Battle</title>
+    <script src="app.js" charset="utf-8"></script>
 
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="styles.css">
-        <script src="/socket.io/socket.io.js"></script>
-        <!-- Fredoka One Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    </head>
-    <body class=multiplayer id="chosen-bg">
-        <div class="container" id="player-status">
-            <div class="player p1">
-                <div id="player1-name"></div>
-                <div class="ready">Ready</div>
-                <div class="score">0</div>
-            </div>
-            
-            <div class="glow" style = "position:relative;  top:25px">HOTPOT BATTLE</div>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Fredoka One Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  </head>
 
-            <div class="player p2">
-                <div id="player2-name"></div>
-                <div class="ready">Ready</div>
-                <div class="score">0</div>
-            </div>
-        </div>
+  <body class=multiplayer id="chosen-bg">
+    <div class="container" id="player-status">
+      <div class="player p1">
+        <div id="player1-name"></div>
+        <div class="ready">Ready</div>
+        <div class="score">0</div>
+        <button id="hearts">Send Hearts</button>
+      </div>
 
-        <div class="container">
-            <div class="hotpot-grid grid-user"></div>
-            <div class="hotpot-grid grid-enemy"></div>
-        </div>
+      <div class="glow" style="position:relative; top:25px">HOTPOT BATTLE</div>
 
-        <div class="container options">
-            <progress value="0" max="10" id="progressBar"></progress>
-            <div class="setup-buttons" id="setup-buttons">
-                <button id="rotate" class="btn2">Rotate</button>
-                <button id="start" class="btn2">Ready</button>
-            </div>
-            <button id="reset" class="btn2">Reset</button>
-        </div>
-        <!-- <img id="hearts" src='heart.png'> -->
-        <button id="hearts">Hearts</button>
-        <img id="get-hearts" src="moving-hearts.gif">
-
-        <div class="container">
-            <div class="grid-display">
-                <div class="food ingr0-container" draggable="true"><div id="ingr0-0"></div><div id="ingr0-1"></div><div id="ingr0-2"></div><div id="ingr0-3"></div></div>
-                <div class="food ingr1-container" draggable="true"><div id="ingr1-0"></div><div id="ingr1-1"></div><div id="ingr1-2"></div><div id="ingr1-3"></div></div>
-                <div class="food ingr2-container" draggable="true"><div id="ingr2-0"></div><div id="ingr2-1"></div><div id="ingr2-2"></div><div id="ingr2-3"></div></div>
-                <div class="food ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
-            </div>
-        </div>
-    </body>
-
-    <input type="button" onclick="tend()" value="smoke on" class="smbutton">
-    <input type="button" onclick="tn()" value="smoke off" class="smbutton">
-
-    <input type="button" onclick="dmon()" value="nightsky" class="darkmodebutton">
-    <input type="button" onclick="dmoff()" value="daylight" class="darkmodebutton">
-
-    <div class="slidecontainer">
-        Low Temp.
-        <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
-        High Temp.
+      <div class="player p2">
+        <div id="player2-name"></div>
+        <div class="ready">Ready</div>
+        <div class="score">0</div>
+      </div>
     </div>
 
-    <div class="bubble" >
-        <h3 id="info" class="info-text"></h3>
+    <div class="container">
+      <div class="hotpot-grid grid-user"></div>
+      <div class="hotpot-grid grid-enemy"></div>
     </div>
 
-    <div class="chef" id="chosen-chef"></div>
-    <div class="box">
-        <a class="btn2" href="#popup1" style="color :#FF0000;">Help</a>
-    </div>
+    <img id="get-hearts" src="images/hearts.gif">
 
-    <div id="popup1" class="overlay" style = "position:relative;  top:-686px">
-        <div class="popup">
-            <h2>How to play?</h2>
-            <a class="close" href="#"> &times;</a>
-            <div class="content">
-                <p style="color :#FF0000;">1. Place your ingredients</p>
-                <p>2. Guess where the opponent's ingredients are</p>
-                <p>3. Win!</p>
-            </div>
+    <div class="container options">
+      <progress value="0" max="10" id="progressBar"></progress>
+      <div style="display: flex; flex-direction: row; margin-bottom: 2rem;">
+        <div class="setup-buttons" id="setup-buttons">
+          <button id="rotate" class="btn2">Rotate</button>
+          <button id="start" class="btn2">Ready</button>
         </div>
+        <button class="btn2" onclick="resetAuth()">Reset</button>
+        <button class="btn2" onclick="showhelp()">Help</button>
+      </div>
     </div>
 
-    <audio controls autoplay loop hidden id="myaudio">
-        <source src="music2.mp3" type="audio/mpeg">
-        <script>
-            var audio = document.getElementById("myaudio");
-            audio.volume = 0.2;
-        </script>
-    </audio>
-    <div class="mutebotton">
-    <input type="button" href="javascript:void(0);" onclick="toggleMute()" value="mute/unmute">
-    <script>
-          function toggleMute() {
-            var myaudio = document.getElementById('myaudio');
-            myaudio.muted = !myaudio.muted;
-            }
-    </script>
+    <div class="container">
+      <div class="grid-display">
+        <div class="food ingr0-container" draggable="true"><div id="ingr0-0"></div><div id="ingr0-1"></div><div id="ingr0-2"></div><div id="ingr0-3"></div></div>
+        <div class="food ingr1-container" draggable="true"><div id="ingr1-0"></div><div id="ingr1-1"></div><div id="ingr1-2"></div><div id="ingr1-3"></div></div>
+        <div class="food ingr2-container" draggable="true"><div id="ingr2-0"></div><div id="ingr2-1"></div><div id="ingr2-2"></div><div id="ingr2-3"></div></div>
+        <div class="food ingr3-container" draggable="true"><div id="ingr3-0"></div><div id="ingr3-1"></div><div id="ingr3-2"></div><div id="ingr3-3"></div></div>
+      </div>
     </div>
+  </body>
 
+  <input type="button" onclick="toggleSmoke()" value="Smoke On" class="smbutton">
 
-    <img src ="smokes.png" id="smoke"/>
-    <script>
-        function tend() {
-            document.getElementById('smoke').style.visibility='visible';
-        }
-        function tn() {
-            document.getElementById('smoke').style.visibility='hidden';
-        }
-    </script>
+  <input type="button" onclick="dm()" value="Night Sky" class="darkmodebutton">
 
-    <img src ="nightsky.png" id="darkmode"/>
-    <script>
-        function dmon() {
-            document.getElementById('darkmode').style.visibility='visible';
-        }
-        function dmoff() {
-            document.getElementById('darkmode').style.visibility='hidden';
-        }
-    </script>
+  <input type="button" onclick="toggleMute()" id="mute" value="Mute Music" class="mutebutton">
 
+  <div class="slidecontainer">
+    Low Temp.
+    <input type="range" min="0" max="100" value="20" class="slider" id="volume-slider">
+    High Temp.
+  </div>
+
+  <div class="bubble">
+    <h3 id="info" class="info-text">Hi!</h3>
+  </div>
+
+  <div class="chef" id="chosen-chef"></div>
+
+  <div id="popup1" class="overlay">
+    <div class="popup">
+      <h2>How to play?</h2>
+      <a class="close" onclick="hidehelp()"> &times;</a>
+      <div class="content">
+        <p>1. Place your ingredients in the pot.</p>
+        <p>2. Guess where the opponent's ingredients are.</p>
+        <p>3. Win!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-popup" id="myForm">
+    <form class="form-container">
+      <label for="psw"><b>Login</b></label>
+      <input type="password" placeholder="Enter Password" id="pass" required>
+      <h5 id="passWrong" style="margin: -1rem 0 1rem 0; visibility: hidden; color: red;">Incorrect Password</h5>
+      <button type="button" class="btn" id="reset">Confirm Reset</button>
+      <button type="button" class="btn cancel" onclick="closeAuth()">Close</button>
+    </form>
+  </div>
+
+  <audio controls autoplay loop hidden id="myaudio">
+    <source src="audio/music2.mp3" type="audio/mpeg">
+  </audio>
+
+  <img src="images/smokes.png" id="smoke" />
+  <img src="images/nightsky.png" id="darkmode" />
+
+  <script>
+    var audio = document.getElementById("myaudio");
+    audio.volume = 0.2;  
+
+    function toggleMute() {
+      var myaudio = document.getElementById('myaudio');
+      myaudio.muted = !myaudio.muted;
+      document.getElementById("mute").value == "Mute Music" ? document.getElementById("mute").value = "Unmute" : document.getElementById("mute").value = "Mute Music";
+    }    
+
+    function toggleSmoke() {
+      document.getElementById("smoke").style.visibility == "visible" ? document.getElementById("smoke").style.visibility = "hidden" : document.getElementById("smoke").style.visibility = "visible";
+      document.querySelector(".smbutton").value == "Smoke On" ? document.querySelector(".smbutton").value = "Smoke Off" : document.querySelector(".smbutton").value = "Smoke On";
+    }
+
+    function dm() {
+      document.getElementById("darkmode").style.visibility == "visible" ? document.getElementById("darkmode").style.visibility = "hidden" : document.getElementById("darkmode").style.visibility = "visible";
+      document.querySelector(".darkmodebutton").value == "Daylight" ? document.querySelector(".darkmodebutton").value = "Night Sky" : document.querySelector(".darkmodebutton").value = "Daylight";
+    }
+
+    function showhelp() {
+      document.querySelector('.overlay').style.visibility = 'visible';
+    }
+
+    function hidehelp() {
+      document.querySelector('.overlay').style.visibility = 'hidden';
+    }
+
+    function resetAuth() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeAuth() {
+      document.getElementById("myForm").style.display = "none";
+    }
+  </script>
 </html>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {  
+document.addEventListener('DOMContentLoaded', () => {
   const userGrid = document.querySelector('.grid-user')
   const enemyGrid = document.querySelector('.grid-enemy')
   const displayGrid = document.querySelector('.grid-display')
@@ -27,19 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let p1Score = 0
   let p2Score = 0
 
-  let player1Name = document.querySelector('#player1-name')  
+  let player1Name = document.querySelector('#player1-name')
   console.log('sessionstorage player1:',sessionStorage.getItem('player1'))
   if (sessionStorage.getItem('player1') == null) player1Name.innerHTML = 'You'
   else player1Name.innerHTML = sessionStorage.getItem('player1')
 
-  let soupsoup = document.querySelector('#chosen-bg')  
+  let soupsoup = document.querySelector('#chosen-bg')
   console.log('sessionstorage bg:',sessionStorage.getItem('bg'))
-  if (sessionStorage.getItem('bg') == null) soupsoup.style.backgroundImage = "url(twosoupbg.png)"
+  if (sessionStorage.getItem('bg') == null) soupsoup.style.backgroundImage = "url(images/twosoupbg.png)"
   else soupsoup.style.backgroundImage = sessionStorage.getItem('bg')
 
-  let chefchef = document.querySelector('#chosen-chef')  
+  let chefchef = document.querySelector('#chosen-chef')
   console.log('sessionstorage chef:',sessionStorage.getItem('chef'))
-  if (sessionStorage.getItem('chef') == null) chefchef.style.backgroundImage = "url(chefman.svg)"
+  if (sessionStorage.getItem('chef') == null) chefchef.style.backgroundImage = "url(images/chefman.svg)"
   else chefchef.style.backgroundImage = sessionStorage.getItem('chef')
 
   const foodArray = [
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('enemy-ready', num => {
       enemyReady = true
-      playerReady(num)
+      playerReady()
       if (ready) {
         playGameMulti(socket)
         setupButtons.style.display = 'none'
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('check-players', players => {
       players.forEach((p, i) => {
         if(p.ready) {
-          playerReady(i)
+          playerReady()
           if(i !== playerReady) enemyReady = true
         }
       })
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startButton.addEventListener('click', () => {
       if(allFoodPlaced) playGameMulti(socket)
-      else infoDisplay.innerHTML = "Please place all ships"
+      else infoDisplay.innerHTML = "Please place all your food!"
     })
 
     enemySquares.forEach(square => {
@@ -144,10 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
       let player2Name = document.querySelector('#player2-name')
       if (enemyName == null) {
         player2Name.innerHTML = 'Your Hotpot Enemy'
-      } else {           
+      } else {
         sessionStorage.setItem('player2', enemyName)
-        player2Name.innerHTML = enemyName     
-      }      
+        player2Name.innerHTML = enemyName
+      }
       socket.emit('player-name', sessionStorage.getItem('player1'))
     })
   }
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       squares.push(square)
     }
   }
-  
+
   function rotate() {
     if (isHorizontal) {
       ingr0.classList.toggle('ingr0-container-vertical')
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let shipLastId = lastShipIndex + parseInt(this.dataset.id)
     const notAllowedHorizontal = [0,8,16,24,32,40,48,56,1,9,17,25,33,41,49,57,2,10,18,26,34,42,80]
     const notAllowedVertical = [63,62,61,60,59,58,57,56,55,54,53,52,51,50]
-    
+
     let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 8 * lastShipIndex)
     console.log(newNotAllowedHorizontal)
     let newNotAllowedVertical = notAllowedVertical.splice(0, 8 * lastShipIndex)
@@ -263,10 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!ready) {
       socket.emit('player-ready')
       ready = true
-      playerReady(playerNum)
+      playerReady()
     }
 
     if(enemyReady) {
+      document.querySelector("progress").style.display = "block"
       turnColor()
       startTimer()
     }
@@ -296,20 +297,24 @@ document.addEventListener('DOMContentLoaded', () => {
       timeleft -= 1;
     }, 1000);
   }
+
   resetButton.addEventListener('click', reset)
   function reset() {
-    console.log('reset called');
-    socket.emit("reset game please");
+    if (document.getElementById("pass").value === 'battleship') {
+      socket.emit("reset game please");
+    } else {
+      document.getElementById("passWrong").style.visibility = 'visible'
+    }
   }
-  socket.on("client reset game",()=>{
-    console.log('client reset game');
+
+  socket.on("client reset game", () => {
     location.reload();
-  }) 
+  })
 
   const heart = document.querySelector('#hearts')
   const getHearts = document.querySelector('#get-hearts')
   heart.addEventListener('click', sendHearts)
-  function sendHearts ()  {
+  function sendHearts()  {
     console.log("hearts")
     socket.emit('send-hearts')
   }
@@ -319,12 +324,22 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       getHearts.style.visibility = 'visible'
     }
-    
+    if (heart.innerHTML == 'Send Hearts') {
+      heart.innerHTML = 'Stop Hearts'
+    } else {
+      heart.innerHTML = 'Send Hearts'
+    }
   })
 
-  function playerReady(num) {
-    let player = `.p${parseInt(num) + 1}`
-    document.querySelector(`${player} .ready`).classList.toggle('active')
+  function playerReady() {
+    if (enemyReady === true) {
+      document.querySelector(`.p2 .ready`).style.opacity = 1;
+      document.querySelector(`.p2 .ready`).style.textDecoration = "none";
+    }
+    if (ready === true) {
+      document.querySelector(`.p1 .ready`).style.opacity = 1;
+      document.querySelector(`.p1 .ready`).style.textDecoration = "none";
+    }
   }
 
   function playerScore(num) {
@@ -381,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkForWins() {
-    let enemy = 'enemy'
+    let enemy = sessionStorage.getItem('player1')
     if (ingr0Count === 4) {
       infoDisplay.innerHTML = `You found ${enemy}'s aubergine!`
       ingr0Count = 10
@@ -425,18 +440,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if ((ingr0Count + ingr1Count + ingr2Count + ingr3Count) >= 40) {
       infoDisplay.innerHTML = "YOU WIN"
+      document.querySelector("progress").style.display = "none"
     }
     if ((oppIngr0Count + oppIngr1Count + oppIngr2Count + oppIngr3Count) >= 40) {
       infoDisplay.innerHTML = `${enemy.toUpperCase()} WINS`
+      document.querySelector("progress").style.display = "none"
     }
   }
 
-
-let volume = document.getElementById("volume-slider");
-volume.addEventListener("change", function(e) {
-    audio.volume = e.currentTarget.value / 100;
-})
-
-
-
+  let volume = document.getElementById("volume-slider");
+  volume.addEventListener("change", function(e) {
+      audio.volume = e.currentTarget.value / 100;
+  })
 })
