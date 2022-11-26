@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkForWins() {
-    let enemy = sessionStorage.getItem('player1')
+    let enemy = sessionStorage.getItem('player2')
     if (ingr0Count === 4) {
       infoDisplay.innerHTML = `You found ${enemy}'s aubergine!`
       ingr0Count = 10
